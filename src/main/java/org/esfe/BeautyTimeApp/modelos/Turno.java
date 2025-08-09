@@ -21,8 +21,6 @@ public class Turno {
     @Column(name = "hora_fin", nullable = false)
     private LocalTime horaFin;
 
-    @OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Cupo> cupos = new ArrayList<>();
 
     public Turno() {}
 
@@ -45,6 +43,4 @@ public class Turno {
     public LocalTime getHoraFin() { return horaFin; }
     public void setHoraFin(LocalTime horaFin) { this.horaFin = horaFin; }
 
-    public List<Cupo> getCupos() { return cupos; }
-    public void setCupos(List<Cupo> cupos) { this.cupos = cupos; }
 }

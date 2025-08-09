@@ -18,5 +18,4 @@ public interface IUsuarioService {
     Usuario crearOEditar(Usuario usuario);
 
     void eliminarPorId(Integer id);
-
 }

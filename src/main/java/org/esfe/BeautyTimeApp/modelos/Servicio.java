@@ -37,9 +37,6 @@ public class Servicio {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
-    @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Cupo> cupos = new ArrayList<>();
-
     public Servicio() {}
 
     public Servicio(String nombreServicio, String descripcion, BigDecimal precio, int duracion, Categoria categoria) {
@@ -69,6 +66,4 @@ public class Servicio {
     public Categoria getCategoria() { return categoria; }
     public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
-    public List<Cupo> getCupos() { return cupos; }
-    public void setCupos(List<Cupo> cupos) { this.cupos = cupos; }
 }

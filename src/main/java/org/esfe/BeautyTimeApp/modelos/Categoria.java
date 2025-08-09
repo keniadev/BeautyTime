@@ -14,9 +14,6 @@ public class Categoria {
     @Column(name = "nombre_categoria", nullable = false, length = 100)
     private String nombreCategoria;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Servicio> servicios = new ArrayList<>();
-
     public Categoria() {}
 
     public Categoria(String nombreCategoria) {
@@ -28,7 +25,4 @@ public class Categoria {
 
     public String getNombreCategoria() { return nombreCategoria; }
     public void setNombreCategoria(String nombreCategoria) { this.nombreCategoria = nombreCategoria; }
-
-    public List<Servicio> getServicios() { return servicios; }
-    public void setServicios(List<Servicio> servicios) { this.servicios = servicios; }
 }
