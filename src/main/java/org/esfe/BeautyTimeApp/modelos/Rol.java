@@ -1,29 +1,22 @@
 package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "estados_cupos")
-public class EstadoCupo {
+@Table(name="roles")
+public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @NotBlank(message = "El nombre del rol es requerido")
+    @Column(nullable = false, length = 100)
     private String nombre;
 
+    public Rol() {}
 
-
-
-    public EstadoCupo() {
-    }
-
-
-    public EstadoCupo(String nombre ) {
-        this.nombre = nombre;
-
-    }
 
     public Integer getId() {
         return id;
@@ -40,6 +33,4 @@ public class EstadoCupo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
 }

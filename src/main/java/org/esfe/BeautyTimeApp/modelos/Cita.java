@@ -1,6 +1,9 @@
 package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,56 +13,52 @@ public class Cita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 100)
-    private String nombrecliente;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
-    @Column(name = "fecha", nullable = false)
-    private LocalDateTime fecha;
+    @NotBlank(message = "El teléfono es requerido")
+    @Pattern(regexp = "^\\+?[0-9]{8,15}$", message = "Teléfono inválido")
+    @Column(length = 20)
+    private String telefono;
 
-    @Column(nullable = false)
-    private Integer cupo;
+    @Column(name= "fecha_reserva", nullable = false)
+    private LocalDateTime fechaReserva;
 
-    // Constructor vacío (requerido por JPA)
-    public Cita() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cupo_id", nullable = false)
+    private Cupo cupo;
 
-    // Constructor con campos
-    public Cita(String nombre, LocalDateTime fecha, Integer cupo) {
-        this.nombrecliente = nombre;
-        this.fecha = fecha;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estado_cita_id", nullable = false)
+    private EstadoCita estadoCita;
+
+    public Cita() {}
+
+    public Cita(Usuario usuario, String telefono, LocalDateTime fechaReserva, Cupo cupo, EstadoCita estadoCita) {
+        this.usuario = usuario;
+        this.telefono = telefono;
+        this.fechaReserva = fechaReserva;
         this.cupo = cupo;
+        this.estadoCita = estadoCita;
     }
 
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public String getNombre() {
-        return nombrecliente;
-    }
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
-    public void setNombre(String nombre) {
-        this.nombrecliente = nombre;
-    }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 
-    public LocalDateTime getFechaHora() {
-        return fecha;
-    }
+    public LocalDateTime getFechaReserva() { return fechaReserva; }
+    public void setFechaReserva(LocalDateTime fechaReserva) { this.fechaReserva = fechaReserva; }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fecha = fechaHora;
-    }
+    public Cupo getCupo() { return cupo; }
+    public void setCupo(Cupo cupo) { this.cupo = cupo; }
 
-    public Integer getCupo() {
-        return cupo;
-    }
-
-    public void setCupo(Integer cupo) {
-        this.cupo = cupo;
-    }
+    public EstadoCita getEstadoCita() { return estadoCita; }
+    public void setEstadoCita(EstadoCita estadoCita) { this.estadoCita = estadoCita; }
 }

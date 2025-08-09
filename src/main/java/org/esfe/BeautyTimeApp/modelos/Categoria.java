@@ -1,6 +1,8 @@
 package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categorias")
@@ -8,8 +10,25 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre;
 
+    @Column(name = "nombre_categoria", nullable = false, length = 100)
+    private String nombreCategoria;
+
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Servicio> servicios = new ArrayList<>();
+
+    public Categoria() {}
+
+    public Categoria(String nombreCategoria) {
+        this.nombreCategoria = nombreCategoria;
+    }
+
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+
+    public String getNombreCategoria() { return nombreCategoria; }
+    public void setNombreCategoria(String nombreCategoria) { this.nombreCategoria = nombreCategoria; }
+
+    public List<Servicio> getServicios() { return servicios; }
+    public void setServicios(List<Servicio> servicios) { this.servicios = servicios; }
 }
-
-

@@ -1,6 +1,7 @@
 package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "estados_cita")
@@ -10,21 +11,18 @@ public class EstadoCita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 50, unique = true)
-    private String nombre;
-
-
-
+    @NotBlank(message = "El nombre de la cita es requerido")
+    @Column(name = "nombre_cita", nullable = false, length = 50, unique = true)
+    private String nombreCita;
 
     public EstadoCita() {
     }
 
 
     public EstadoCita(String nombre) {
-        this.nombre = nombre;
+        this.nombreCita = nombre;
 
     }
-
 
     public Integer getId() {
         return id;
@@ -34,21 +32,11 @@ public class EstadoCita {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreCita() {
+        return nombreCita;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "EstadoCita{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                '}';
+    public void setNombreCita (String nombreCita) {
+        this.nombreCita = nombreCita;
     }
 }

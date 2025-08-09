@@ -1,7 +1,9 @@
 package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
-import java.time.LocalTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "cupos")
@@ -11,45 +13,47 @@ public class Cupo {
     private Integer id;
 
     @Column(nullable = false)
-    private Integer disponibilidad;
+    private Integer cantidad;
 
-    @Column(length = 50)
-    private String fecha; //
+    @Column(nullable = false)
+    private LocalDate fecha;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "servicio_id", nullable = false)
+    private Servicio servicio;
 
-    public Cupo() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "turno_id", nullable = false)
+    private Turno turno;
 
+    @OneToMany(mappedBy = "cupo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Cita> citas = new ArrayList<>();
 
-    public Cupo( Integer disponibilidad, String fecha) {
-        this.disponibilidad = disponibilidad;
+    public Cupo() {}
+
+    public Cupo(Integer cantidad, LocalDate fecha, Servicio servicio, Turno turno) {
+        this.cantidad = cantidad;
         this.fecha = fecha;
+        this.servicio = servicio;
+        this.turno = turno;
     }
 
+    // getters y setters
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getCantidad() { return cantidad; }
+    public void setCantidad(Integer cantidad) { this.cantidad = cantidad; }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public LocalDate getFecha() { return fecha; }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
 
+    public Servicio getServicio() { return servicio; }
+    public void setServicio(Servicio servicio) { this.servicio = servicio; }
 
+    public Turno getTurno() { return turno; }
+    public void setTurno(Turno turno) { this.turno = turno; }
 
-    public Integer getDisponibilidad() {
-        return disponibilidad;
-    }
-
-    public void setDisponibilidad(Integer disponibilidad) {
-        this.disponibilidad = disponibilidad;
-    }
-
-    public String getfecha() {
-        return fecha;
-    }
-
-    public void setfecha(String diaSemana) {
-        this.fecha = diaSemana;
-    }
+    public List<Cita> getCitas() { return citas; }
+    public void setCitas(List<Cita> citas) { this.citas = citas; }
 }
