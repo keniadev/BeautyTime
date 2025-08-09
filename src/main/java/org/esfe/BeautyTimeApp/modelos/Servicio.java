@@ -16,6 +16,7 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
     @NotBlank
     @Size(max = 100)
     @Column(name="nombre_servicio", nullable = false, length = 100)
@@ -30,9 +31,11 @@ public class Servicio {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
+    @NotNull
     @Column(nullable = false)
     private int duracion;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;

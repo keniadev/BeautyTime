@@ -2,7 +2,9 @@ package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
@@ -17,18 +19,21 @@ public class Cita {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @NotBlank(message = "El teléfono es requerido")
-    @Pattern(regexp = "^\\+?[0-9]{8,15}$", message = "Teléfono inválido")
+    @NotBlank
+    @Size(max = 20)
     @Column(length = 20)
     private String telefono;
 
+    @NotNull
     @Column(name= "fecha_reserva", nullable = false)
     private LocalDateTime fechaReserva;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cupo_id", nullable = false)
     private Cupo cupo;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estado_cita_id", nullable = false)
     private EstadoCita estadoCita;
