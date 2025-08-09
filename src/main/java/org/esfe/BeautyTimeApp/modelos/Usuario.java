@@ -3,6 +3,7 @@ package org.esfe.BeautyTimeApp.modelos;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,11 @@ public class Usuario {
     @Column(nullable = false, length = 100)
     private String contrasena;
 
-    @Column(name ="foto_perfil")
+    @Size(max = 255)
+    @Column(name ="foto_perfil", length = 255)
     private String fotoPerfil;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;

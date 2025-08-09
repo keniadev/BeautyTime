@@ -1,6 +1,9 @@
 package org.esfe.BeautyTimeApp.modelos;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +15,17 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
     @Column(name = "nombre_turno", nullable = false, length = 50)
     private String nombreTurno;
 
+    @NotNull
     @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;
 
+    @NotNull
     @Column(name = "hora_fin", nullable = false)
     private LocalTime horaFin;
-
 
     public Turno() {}
 

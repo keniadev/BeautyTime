@@ -11,16 +11,16 @@ public class EstadoCita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "El nombre de la cita es requerido")
+    @NotBlank(message = "El nombre del estado es requerido")
     @Column(name = "nombre_cita", nullable = false, length = 50, unique = true)
-    private String nombreCita;
+    private String nombreEstado;
 
     public EstadoCita() {
     }
 
 
     public EstadoCita(String nombre) {
-        this.nombreCita = nombre;
+        this.nombreEstado = nombre;
 
     }
 
@@ -32,11 +32,11 @@ public class EstadoCita {
         this.id = id;
     }
 
-    public String getNombreCita() {
-        return nombreCita;
+    public String getNombreEstado() {
+        return nombreEstado;
     }
 
-    public void setNombreCita (String nombreCita) {
-        this.nombreCita = nombreCita;
+    public void setNombreEstado (String nombreEstado) {
+        this.nombreEstado = nombreEstado;
     }
 }
