@@ -42,9 +42,6 @@ public class Usuario {
     @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Cita> citas = new ArrayList<>();
-
     public Usuario() {}
 
     public Usuario(String nombre, String apellido, String correo, String contrasena, String fotoPerfil, Rol rol) {
@@ -76,7 +73,4 @@ public class Usuario {
 
     public Rol getRol() { return rol; }
     public void setRol(Rol rol) { this.rol = rol; }
-
-    public List<Cita> getCitas() { return citas; }
-    public void setCitas(List<Cita> citas) { this.citas = citas; }
 }

@@ -26,8 +26,6 @@ public class Cupo {
     @JoinColumn(name = "turno_id", nullable = false)
     private Turno turno;
 
-    @OneToMany(mappedBy = "cupo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Cita> citas = new ArrayList<>();
 
     public Cupo() {}
 
@@ -54,6 +52,4 @@ public class Cupo {
     public Turno getTurno() { return turno; }
     public void setTurno(Turno turno) { this.turno = turno; }
 
-    public List<Cita> getCitas() { return citas; }
-    public void setCitas(List<Cita> citas) { this.citas = citas; }
 }
