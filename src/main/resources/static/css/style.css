@@ -1,0 +1,19 @@
+
+
+
+body{
+
+padding: 0;
+margin:0;
+
+
+}
+
+.texto {
+
+color: #fff;
+}
+.nav{
+display: flex;
+background-color:pink;
+}
