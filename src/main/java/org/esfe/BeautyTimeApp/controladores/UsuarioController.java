@@ -32,7 +32,6 @@ public class UsuarioController {
     @Autowired
     private IRolService rolService;
 
-    // -------------------- LISTAR USUARIOS --------------------
     @GetMapping
     public String index(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size ){
         int currentPage = page.orElse(1) -1;
@@ -52,24 +51,23 @@ public class UsuarioController {
         return "usuario/index";
     }
 
-    // -------------------- CREAR USUARIO --------------------
     @GetMapping("/create")
     public String create(Model model){
         model.addAttribute("usuario", new Usuario());
-        model.addAttribute("roles", rolService.ObtenerTodos()); // Trae todos los roles
+        model.addAttribute("roles", rolService.ObtenerTodos());
         return "usuario/create";
     }
 
-    // -------------------- GUARDAR USUARIO --------------------
+
     @PostMapping("/save")
     public String save(Usuario usuario, BindingResult result, Model model, RedirectAttributes attributes){
 
         if(result.hasErrors()){
-            model.addAttribute("roles", rolService.ObtenerTodos()); // Para recargar select si hay error
+            model.addAttribute("roles", rolService.ObtenerTodos());
             return "usuario/create";
         }
 
-        // Traer el objeto Rol completo según el id enviado desde el select
+
         Optional<Rol> rolOptional = rolService.BuscarPorId(usuario.getRol().getId());
         if(rolOptional.isPresent()){
             usuario.setRol(rolOptional.get());
