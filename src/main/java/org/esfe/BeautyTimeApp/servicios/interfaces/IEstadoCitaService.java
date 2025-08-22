@@ -18,4 +18,6 @@ public interface IEstadoCitaService {
     EstadoCita crearOEditar(EstadoCita estadoCita);
 
     void eliminarPorId(Integer id);
+
+    Optional<EstadoCita> buscarPorNombre(String nombreEstado);
 }
