@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")//que sea la primera en mostrarse
 public class HomeController {
     @GetMapping
-    public String index(){
+    public String index() {
         return "home/index";
     }
 }
