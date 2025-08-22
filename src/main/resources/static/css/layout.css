@@ -1,0 +1,14 @@
+
+.menu-logo{
+    display: flex;
+}
+
+.nav{
+    display: flex;
+}
+.nav-item{
+
+    color: aqua;
+}
+a{
+    text-decoration: none;
