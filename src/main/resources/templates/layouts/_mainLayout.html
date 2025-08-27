@@ -2,16 +2,6 @@
 <html lang="es"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Beauty Time</title>
-    <link th:href="@{/css/layout.css}" rel="stylesheet" />
-    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-</head>
 
 <head>
     <meta charset="utf-8" />
@@ -26,12 +16,9 @@
 
 <body>
 
-<header id="header">
-    <div class="menu-logo">
-        <div class="div-logo">
-            <h2>BeautyTime</h2>
-        </div>
 
+<header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  
         <nav class="nav">
             <ul>
                 <li><a href="#">Inicio</a></li>
@@ -43,20 +30,20 @@
                 <li><a th:href="@{/categorias}">Panel Administrativo</a></li>
             </ul>
         </nav>
+
     </div>
 </header>
 
-<!-- Fragmento que cambiará según la vista -->
-<div layout:fragment="content"></div>
+<main class="flex-grow-1" layout:fragment="content-placeholder">
+</main>
 
-<footer>
-    <p>BeautyTime Derechos reservados</p>
-</footer>
 
-<!-- jQuery primero, luego Popper.js, luego Bootstrap JS -->
-<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+
 <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
-
+<script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
 <script th:src="@{/js/scripts.js}"></script>
+
+
+
 </body>
 </html>
