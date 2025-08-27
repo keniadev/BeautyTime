@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainLayout}">
+<head>
+    <title th:text="${categoria.id != null} ? 'Editar Categoría' : 'Crear Categoría'">Formulario Categoría</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <!-- Card Container -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0 text-center" th:text="${categoria.id != null} ? 'Editar Categoría' : 'Crear Nueva Categoría'"></h5>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Mensajes -->
+                        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span th:text="${success}"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span th:text="${error}"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+
+                        <!-- Formulario -->
+                        <form th:action="@{/categorias/guardar}" th:object="${categoria}" method="post">
+                            <input type="hidden" th:field="*{id}">
+
+                            <div class="mb-3">
+                                <label for="nombreCategoria" class="form-label">Nombre de la Categoría</label>
+                                <input type="text" class="form-control" id="nombreCategoria"
+                                       th:field="*{nombreCategoria}"
+                                       placeholder="Ej: Cortes de Cabello, Maquillaje..."
+                                       required>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <span th:if="${categoria.id != null}">💾 Actualizar</span>
+                                    <span th:if="${categoria.id == null}">💾 Guardar Categoría</span>
+                                </button>
+                                <a th:href="@{/categorias}" class="btn btn-outline-secondary">Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
