@@ -37,10 +37,14 @@
                 <div th:each="categoria : ${categorias}" class="categoria-card">
                     <div class="categoria-card-header">
                         <span class="categoria-id">ID: <span th:text="${categoria.id}"></span></span>
-                        <div class="categoria-icon">📁</div>
+
                     </div>
 
-                    <h3 class="categoria-nombre" th:text="${categoria.nombreCategoria}"></h3>
+                    <h3 class="categoria-nombre">
+                        <a th:href="@{'/servicios/gestionar?categoriaId=' + ${categoria.id}}"
+                           th:text="${categoria.nombreCategoria}">
+                        </a>
+                    </h3>
 
                     <div class="categoria-actions">
                         <a th:href="@{'/categorias/editar/' + ${categoria.id}}"
