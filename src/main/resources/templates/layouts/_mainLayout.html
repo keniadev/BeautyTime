@@ -12,6 +12,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Beauty Time</title>
+    <link th:href="@{/css/layout.css}" rel="stylesheet" />
+    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" /> <!-- Esta línea -->
+    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
 <body>
 
 <header id="header">
@@ -28,7 +40,7 @@
                 <li><a href="#">Mis Citas</a></li>
             </ul>
             <ul>
-                <li><a href="#">Panel Administrativo</a></li>
+                <li><a th:href="@{/categorias}">Panel Administrativo</a></li>
             </ul>
         </nav>
     </div>

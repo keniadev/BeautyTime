@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainLayout}">
+<head>
+  <title th:text="${servicio.id != null} ? 'Editar Servicio' : 'Crear Servicio'">Formulario Servicio</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <!-- Card Container -->
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-white py-3">
+            <h5 class="card-title mb-0 text-center"
+                th:text="${servicio.id != null} ? 'Editar Servicio' : 'Crear Nuevo Servicio'"></h5>
+          </div>
+
+          <div class="card-body">
+            <!-- Mensajes -->
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+              <span th:text="${success}"></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <span th:text="${error}"></span>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <!-- Formulario -->
+            <form th:action="@{/servicios/guardar}" th:object="${servicio}" method="post">
+              <input type="hidden" th:field="*{id}">
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="nombreServicio" class="form-label">Nombre del Servicio *</label>
+                  <input type="text" class="form-control" id="nombreServicio"
+                         th:field="*{nombreServicio}"
+                         placeholder="Ej: Corte de Cabello, Manicure..."
+                         required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="precio" class="form-label">Precio *</label>
+                  <input type="number" class="form-control" id="precio"
+                         th:field="*{precio}"
+                         placeholder="0.00"
+                         step="0.01"
+                         min="0"
+                         required>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="duracion" class="form-label">Duración (minutos) *</label>
+                  <input type="number" class="form-control" id="duracion"
+                         th:field="*{duracion}"
+                         placeholder="30"
+                         min="1"
+                         required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                  <label for="categoria" class="form-label">Categoría *</label>
+                  <select class="form-select" id="categoria" th:field="*{categoria.id}" required>
+                    <option value="">Seleccionar categoría</option>
+                    <option th:each="cat : ${categorias}"
+                            th:value="${cat.id}"
+                            th:text="${cat.nombreCategoria}"></option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="descripcion"
+                          th:field="*{descripcion}"
+                          placeholder="Descripción del servicio..."
+                          rows="3"></textarea>
+              </div>
+
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">
+                  <span th:if="${servicio.id != null}">💾 Actualizar</span>
+                  <span th:if="${servicio.id == null}">💾 Guardar Servicio</span>
+                </button>
+                <a th:href="@{/servicios/gestionar}" class="btn btn-outline-secondary">Cancelar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

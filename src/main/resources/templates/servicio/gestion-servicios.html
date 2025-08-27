@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainLayout}">
+<head>
+    <title>Gestión de Servicios - BeautyTimeApp</title>
+    <style>
+        .service-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        .service-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .service-image {
+            height: 120px;
+            object-fit: cover;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-placeholder {
+            font-size: 2rem;
+            color: #6c757d;
+        }
+        .btn-action {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+        .category-header {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .filter-buttons {
+            margin-bottom: 20px;
+        }
+        .filter-buttons .btn {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <!-- Header de la categoría -->
+        <div class="category-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2>Gestión de Servicios</h2>
+                    <p class="mb-0" th:if="${categoriaActual != null}">
+                        Categoría: <strong th:text="${categoriaActual.nombreCategoria}"></strong>
+                    </p>
+                    <p class="mb-0" th:unless="${categoriaActual != null}">
+                        Todos los servicios
+                    </p>
+                </div>
+                <a th:href="@{/categorias}" class="btn btn-light">
+                    ← Volver a Categorías
+                </a>
+            </div>
+        </div>
+
+        <!-- Mensajes de éxito/error -->
+        <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Filtros por categoría -->
+        <div class="filter-buttons" th:if="${categorias != null and !categorias.isEmpty()}">
+            <h5>Filtrar por categoría:</h5>
+            <a th:href="@{/servicios/gestionar}" class="btn btn-outline-primary">
+                Todas las categorías
+            </a>
+            <a th:each="cat : ${categorias}"
+               th:href="@{'/servicios/gestionar?categoriaId=' + ${cat.id}}"
+               th:classappend="${categoriaActual != null and categoriaActual.id == cat.id} ? 'btn-primary' : 'btn-outline-primary'"
+               class="btn">
+                <span th:text="${cat.nombreCategoria}"></span>
+            </a>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3>Lista de Servicios</h3>
+            <a th:href="@{/servicios/crear}" class="btn btn-primary">
+                ➕ Nuevo Servicio
+            </a>
+        </div>
+
+        <!-- Grid de servicios -->
+        <div class="row">
+            <div th:each="servicio : ${servicios}" class="col-md-4 col-lg-3 mb-4">
+                <div class="card service-card h-100">
+                    <!-- Espacio para foto del servicio -->
+                    <div class="service-image">
+                        <div class="image-placeholder">
+                            ✂️
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Nombre del servicio -->
+                        <h5 class="card-title" th:text="${servicio.nombreServicio}"></h5>
+
+                        <!-- Precio -->
+                        <p class="card-text">
+                            <strong>Precio:</strong>
+                            <span th:text="${'$' + servicio.precio}"></span>
+                        </p>
+
+                        <!-- Duración -->
+                        <p class="card-text">
+                            <strong>Duración:</strong>
+                            <span th:text="${servicio.duracion + ' min'}"></span>
+                        </p>
+
+                        <!-- Categoría -->
+                        <p class="card-text">
+                            <strong>Categoría:</strong>
+                            <span th:text="${servicio.categoria.nombreCategoria}"></span>
+                        </p>
+
+                        <!-- Descripción (opcional) -->
+                        <p class="card-text" th:if="${servicio.descripcion != null and !servicio.descripcion.isEmpty()}">
+                            <strong>Descripción:</strong>
+                            <small class="text-muted" th:text="${servicio.descripcion}"></small>
+                        </p>
+                    </div>
+
+                    <!-- Acciones -->
+                    <div class="card-footer bg-white border-0">
+                        <div class="d-grid gap-2">
+                            <!-- Botón Editar -->
+                            <a th:href="@{'/servicios/editar/' + ${servicio.id}}"
+                               class="btn btn-outline-warning btn-action">
+                                ✏️ Editar
+                            </a>
+                            <!-- Botón Eliminar -->
+                            <a th:href="@{'/servicios/eliminar/' + ${servicio.id}}"
+                               class="btn btn-outline-danger btn-action"
+                               onclick="return confirm('¿Estás seguro de eliminar este servicio?')">
+                                🗑️ Eliminar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje cuando no hay servicios -->
+        <div th:if="${servicios != null and servicios.isEmpty()}" class="text-center py-5">
+            <div class="service-image mx-auto mb-3" style="max-width: 200px;">
+                <div class="image-placeholder">✂️</div>
+            </div>
+            <h4 class="text-muted" th:if="${categoriaActual != null}">
+                No hay servicios en la categoría: <span th:text="${categoriaActual.nombreCategoria}"></span>
+            </h4>
+            <h4 class="text-muted" th:unless="${categoriaActual != null}">
+                No hay servicios registrados
+            </h4>
+            <p class="text-muted">Comienza creando tu primer servicio</p>
+            <a th:href="@{/servicios/crear}" class="btn btn-primary mt-2">
+                ➕ Crear Primer Servicio
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
