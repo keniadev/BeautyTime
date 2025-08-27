@@ -17,13 +17,9 @@ public class EstadoCita {
 
     public EstadoCita() {
     }
-
-
     public EstadoCita(String nombre) {
         this.nombreEstado = nombre;
-
     }
-
     public Integer getId() {
         return id;
     }
