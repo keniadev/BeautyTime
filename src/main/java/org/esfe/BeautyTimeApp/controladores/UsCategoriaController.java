@@ -14,7 +14,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/servicios") // ← RUTA BASE CAMBIADA
-public class CategoriaController {
+public class UsCategoriaController {
 
     @GetMapping("/categoria/{id}") // ← NUEVA RUTA: /servicios/categoria/{id}
     public String serviciosPorCategoria(@PathVariable Integer id, Model model) {
