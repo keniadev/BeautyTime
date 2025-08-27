@@ -1,0 +1,132 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:wght@700&display=swap');
+
+/* Variables de color para una paleta femenina y cohesiva */
+/* Eliminadas para evitar conflictos con el main layout */
+
+/* El body se gestiona desde el main layout para mantener consistencia */
+
+/* Contenedor principal de la sección */
+.appointments-container {
+    max-width: 900px;
+    margin: 4rem auto 2rem;
+    padding: 0 1.5rem;
+    text-align: center;
+}
+
+/* Título de la sección */
+.appointments-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #6a0572; /* Color específico para la página de citas */
+    margin-bottom: 2rem;
+    animation: slideInFromTop 0.8s ease-out;
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilo de la lista de tarjetas */
+.appointments-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+/* Estilo de cada tarjeta individual */
+.appointment-card {
+    background-color: #ffffff; /* Fondo blanco de las tarjetas */
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0; /* Gris muy claro para bordes */
+}
+
+.appointment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+.card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #6a0572; /* Color específico para la página de citas */
+    margin: 0 0 1rem;
+    border-bottom: 2px solid #d1b1c6; /* Lila suave para detalles */
+    padding-bottom: 0.5rem;
+}
+
+.card-body p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.card-body strong {
+    color: #6a0572; /* Color específico para la página de citas */
+    font-weight: 600;
+}
+
+/* Estilo para el estado de la cita */
+.estado {
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    display: inline-block;
+}
+
+.estado[th\\:text="PENDIENTE"] {
+    background-color: #ffc107; /* Amarillo para estado "Pendiente" */
+    color: #4a4a4a; /* Gris oscuro para el texto principal */
+}
+
+.estado[th\\:text="COMPLETADA"] {
+    background-color: #28a745; /* Verde para estado "Completada" */
+    color: #fff;
+}
+
+.estado[th\\:text="CANCELADA"] {
+    background-color: #dc3545; /* Rojo para estado "Cancelada" */
+    color: #fff;
+}
+
+/* Estilo para cuando no hay citas */
+.no-appointments {
+    padding: 3rem;
+    border: 2px dashed #d1b1c6; /* Lila suave para detalles */
+    border-radius: 1.5rem;
+    margin-top: 2rem;
+}
+
+.no-appointments p {
+    font-size: 1.2rem;
+    color: #4a4a4a; /* Gris oscuro para el texto principal */
+    font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .appointments-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .appointment-card {
+        max-width: 100%;
+    }
+}

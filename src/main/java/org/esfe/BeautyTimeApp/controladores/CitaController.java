@@ -83,7 +83,15 @@ public class CitaController {
             model.addAttribute("servicios", servicioService.ObtenerTodos());
             return "cita/form-cita";
         }
+
+
     }
+    @GetMapping("/mis-citas")
+    public String misCitas(@RequestParam("usuarioId") Integer usuarioId, Model model) {
+        model.addAttribute("citas", citaService.listarPorUsuario(usuarioId));
+        return "cita/mis-citas";
+    }
+
 
 
 }
