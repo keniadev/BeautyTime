@@ -42,4 +42,10 @@ public class ServicioService implements IServicioService{
 
         ServicioRepository.deleteById(id);
     }
+
+    @Override
+    public List<Servicio> obtenerServiciosPorCategoria(Integer categoriaId) {
+        // Necesitarás crear este método en el repositorio
+        return ServicioRepository.findByCategoriaId(categoriaId);
+    }
 }

@@ -1,11 +1,137 @@
 <!DOCTYPE html>
+
 <html lang="es"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/_mainLayout}">
+
+<head>
+    <!-- CSS específico de home -->
+    <link th:href="@{/css/homepage.css}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 <body>
-<div layout:fragment="content">
-    <h1 class="texto">Bienvenidos</h1>
+<!-- Fragmento que se inyecta en el layout -->
+<div layout:fragment="content-placeholder">
+
+    <!-- HEADER TEMPORAL PARA MOCKS -->
+    <header id="custom-header" class="bg-white shadow-sm py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <h2 class="text-primary mb-0 logo-click">BeautyTime</h2>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar servicios..." id="buscadorInput">
+                        <select class="form-select" style="max-width: 150px;" id="filtroSelect">
+                            <option value="todas">Todas</option>
+                            <option value="uñas">Uñas</option>
+                            <option value="cabello">Cabello</option>
+                            <option value="maquillaje">Maquillaje</option>
+                            <option value="skincare">Skincare</option>
+                            <option value="depilacion">Depilación</option>
+                        </select>
+                        <button class="btn btn-primary" type="button" id="btnBuscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3 text-end">
+                    <button class="btn btn-outline-primary me-2">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Crear Cuenta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER CARRUSEL -->
+    <div id="bannerCarrusel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img th:src="@{/assets/img/pose.jpg}" class="d-block w-100" alt="Promoción 1">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Belleza y Bienestar</h5>
+                    <p>Los mejores tratamientos para tu cuidado personal</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img th:src="@{/assets/img/espejo.jpg}" class="d-block w-100" alt="Promoción 2">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Ofertas Especiales</h5>
+                    <p>Aprovecha nuestros descuentos exclusivos</p>
+
+                </div>
+
+            </div>
+            <div class="carousel-item">
+                <img th:src="@{/assets/img/pelo.jpg}" class="d-block w-100" alt="Promoción 3">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Nuevos Servicios</h5>
+                    <p>Descubre nuestras últimas novedades</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img th:src="@{/assets/img/belleza.jpg}" class="d-block w-100" alt="Promoción 4">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>APROVECHA</h5>
+                    <p>Descubre nuestras últimas novedades</p>
+                </div>
+            </div>
+            <div class="carousel-item"> <!-- ← ESTE DIV ESTABA MAL CERRADO -->
+                <img th:src="@{/assets/img/extravagante.avif}" class="d-block w-100" alt="Promoción 5">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>APROVECHA</h5>
+                    <p>Descubre nuestras últimas novedades</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarrusel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarrusel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+    <!-- SECCIÓN DE CATEGORÍAS -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-2 fw-bold">Nuestros Servicios</h2>
+        <p class="text-center text-muted mb-4">Elige el servicio que necesitas</p>
+
+        <div class="row g-4 justify-content-center" id="categoriasContainer">
+            <div th:each="categoria : ${categorias}" class="col-6 col-md-4 col-lg-3 categoria-item"
+                 th:attr="data-categoria=${#strings.toLowerCase(categoria.nombreCategoria)}"
+                 th:onclick="|window.location.href='/servicios/categoria/' + ${categoria.id}|">
+                <div class="card categoria-card h-100 shadow-sm p-3 text-center">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="icon-circle mb-3 d-flex align-items-center justify-content-center">
+                            <i th:if="${categoria.nombreCategoria == 'Uñas'}" class="fas fa-hand-sparkles fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Cabello'}" class="fas fa-cut fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Maquillaje'}" class="fas fa-palette fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Skincare'}" class="fas fa-spa fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Depilación'}" class="fas fa-feather-alt fa-2x"></i>
+                        </div>
+                        <h5 class="card-title fw-bold" th:text="${categoria.nombreCategoria}"></h5>
+                        <p th:if="${categoria.nombreCategoria == 'Uñas'}" class="card-text text-muted">Manicura, pedicura y diseños de vanguardia.</p>
+                        <p th:if="${categoria.nombreCategoria == 'Cabello'}" class="card-text text-muted">Cortes, coloración y tratamientos para el cabello.</p>
+                        <p th:if="${categoria.nombreCategoria == 'Maquillaje'}" class="card-text text-muted">Looks profesionales para eventos y ocasiones especiales.</p>
+                        <p th:if="${categoria.nombreCategoria == 'Skincare'}" class="card-text text-muted">Tratamientos faciales, limpieza profunda y cuidado.</p>
+                        <p th:if="${categoria.nombreCategoria == 'Depilación'}" class="card-text text-muted">Servicios de depilación con cera y láser.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS HOME -->
+    <script th:src="@{/js/home.js}"></script>
+
 </div>
 </body>
 </html>
+
