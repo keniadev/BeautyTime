@@ -41,4 +41,10 @@ public class EstadoCitaService implements IEstadoCitaService {
     public void eliminarPorId(Integer id) {
         estadoCitaRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<EstadoCita> buscarPorNombre(String nombreEstado) {
+        return estadoCitaRepository.findByNombreEstado(nombreEstado);
+    }
+
 }

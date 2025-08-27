@@ -1,5 +1,6 @@
 package org.esfe.BeautyTimeApp.modelos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,11 +12,13 @@ import java.util.List;
 @Table(name = "cupos")
 public class Cupo {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull
     @Column(nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Integer cantidad;
 
     @NotNull
@@ -25,6 +28,7 @@ public class Cupo {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "servicio_id", nullable = false)
+
     private Servicio servicio;
 
     @NotNull

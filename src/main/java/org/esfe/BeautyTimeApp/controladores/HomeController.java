@@ -22,6 +22,7 @@ public class HomeController {
     private ICategoriaService categoriaService;
 
     @GetMapping
+
     public String index(Model model) {
         try {
             List<Categoria> categorias = categoriaService.ObtenerTodos();

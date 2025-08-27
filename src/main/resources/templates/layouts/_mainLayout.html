@@ -2,99 +2,48 @@
 <html lang="es"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Beauty Time</title>
-
-    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link th:href="@{/css/layout.css}" rel="stylesheet" />
+    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" /> <!-- Esta línea -->
+    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
-<body class="d-flex flex-column min-vh-100">
+
+<body>
+
 
 <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
-        <a class="navbar-brand text-primary fw-bold fs-4" th:href="@{/}">
-            BeautyTime
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <nav>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/citas}">Mis Citas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin}">Panel Administrativo</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+  
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+            </ul>
+            <ul>
+                <li><a href="#">Mis Citas</a></li>
+            </ul>
+            <ul>
+                <li><a th:href="@{/categorias}">Panel Administrativo</a></li>
+            </ul>
+        </nav>
+
     </div>
 </header>
 
 <main class="flex-grow-1" layout:fragment="content-placeholder">
 </main>
 
-<footer class="mt-auto py-4 footer-custom text-white">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 mb-4 mb-lg-0">
-                <h5 class="fw-bold">BeautyTime</h5>
-                <p class="small text-white-50">El lugar perfecto para agendar tus citas de belleza y cuidado personal.</p>
-                <div class="social-icons mt-3">
-                    <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-                    <a href="#" class="text-white-50 me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="#" class="text-white-50 me-3"><i class="fab fa-twitter fa-lg"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                <h6 class="text-uppercase fw-bold">Servicios</h6>
-                <ul class="list-unstyled mb-0">
-                    <li><a href="#" class="text-white-50 text-decoration-none">Cortes de Cabello</a></li>
-                    <li><a href="#" class="text-white-50 text-decoration-none">Maquillaje</a></li>
-                    <li><a href="#" class="text-white-50 text-decoration-none">Uñas</a></li>
-                    <li><a href="#" class="text-white-50 text-decoration-none">Depilación</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                <h6 class="text-uppercase fw-bold">Empresa</h6>
-                <ul class="list-unstyled mb-0">
-                    <li><a href="#" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
-                    <li><a href="#" class="text-white-50 text-decoration-none">Contacto</a></li>
-                    <li><a href="#" class="text-white-50 text-decoration-none">Blog</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-4">
-                <h6 class="text-uppercase fw-bold">Contacto</h6>
-                <p class="text-white-50 mb-1">El Salvador</p>
-                <p class="text-white-50 mb-1">info@beautytime.com</p>
-                <p class="text-white-50">+(503) 1234-5678</p>
-            </div>
-        </div>
-        <hr class="mt-4 mb-3">
-        <div class="text-center small text-white-50">
-            &copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> BeautyTime. Todos los derechos reservados.
-        </div>
-    </div>
-</footer>
+
 
 <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
 <script th:src="@{/js/scripts.js}"></script>
 
-<a href="#" class="btn-agendar-flotante shadow-lg" data-bs-toggle="tooltip" data-bs-placement="left" title="¡Agenda tu próxima cita ahora!">
-    <i class="fas fa-calendar-alt me-2"></i> Agendar Cita
-</a>
+
 
 </body>
 </html>
