@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainLayout}">
+<head>
+    <title>Gestión de Categorías - BeautyTimeApp</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container categorias-cards-container">
+        <div class="categorias-header">
+            <h1>Gestión de Categorías</h1>
+            <p class="text-muted">Organiza y gestiona tus categorías de servicios</p>
+        </div>
+
+        <!-- Mensajes de éxito/error -->
+        <div th:if="${success}" class="alert alert-categoria alert-dismissible fade show" role="alert">
+            <span th:text="${success}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${error}" class="alert alert-danger-categoria alert-dismissible fade show" role="alert">
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Botón para crear nueva categoría -->
+        <div class="text-center mb-4">
+            <a th:href="@{/categorias/crear}" class="btn btn-nueva-categoria">
+                ➕ Nueva Categoría
+            </a>
+        </div>
+
+        <!-- Grid de categorías en cards -->
+        <div th:if="${categorias != null and !categorias.isEmpty()}">
+            <div class="categorias-grid">
+                <div th:each="categoria : ${categorias}" class="categoria-card">
+                    <div class="categoria-card-header">
+                        <span class="categoria-id">ID: <span th:text="${categoria.id}"></span></span>
+
+                    </div>
+
+                    <h3 class="categoria-nombre">
+                        <a th:href="@{'/servicios/gestionar?categoriaId=' + ${categoria.id}}"
+                           th:text="${categoria.nombreCategoria}">
+                        </a>
+                    </h3>
+
+                    <div class="categoria-actions">
+                        <a th:href="@{'/categorias/editar/' + ${categoria.id}}"
+                           class="btn-categoria-action btn-editar">
+                            ✏️ Editar
+                        </a>
+                        <a th:href="@{'/categorias/eliminar/' + ${categoria.id}}"
+                           class="btn-categoria-action btn-eliminar"
+                           onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">
+                            🗑️ Eliminar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje cuando no hay categorías -->
+        <div th:if="${categorias != null and categorias.isEmpty()}" class="categorias-empty">
+            <div class="categoria-card-header">
+                <span class="categoria-id">ID: <span th:text="${categoria.id}"></span></span>
+            </div>
+            <h3>No hay categorías creadas</h3>
+            <p class="text-muted">Comienza creando tu primera categoría para organizar tus servicios</p>
+            <a th:href="@{/categorias/crear}" class="btn btn-nueva-categoria mt-3">
+                ➕ Crear Primera Categoría
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

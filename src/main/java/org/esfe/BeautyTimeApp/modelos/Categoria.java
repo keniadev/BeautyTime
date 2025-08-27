@@ -30,4 +30,10 @@ public class Categoria {
 
     public String getNombreCategoria() { return nombreCategoria; }
     public void setNombreCategoria(String nombreCategoria) { this.nombreCategoria = nombreCategoria; }
+
+    // Agrega este constructor en tu clase Categoria
+    public Categoria(Integer id, String nombreCategoria) {
+        this.id = id;
+        this.nombreCategoria = nombreCategoria;
+    }
 }
