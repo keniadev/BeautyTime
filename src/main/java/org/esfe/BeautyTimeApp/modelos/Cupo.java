@@ -12,6 +12,7 @@ import java.util.List;
 @Table(name = "cupos")
 public class Cupo {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
