@@ -2,14 +2,12 @@ package org.esfe.BeautyTimeApp.controladores;
 
 
 import org.esfe.BeautyTimeApp.dtos.CupoDTO;
-import org.esfe.BeautyTimeApp.modelos.Cupo;
 import org.esfe.BeautyTimeApp.modelos.Servicio;
 import org.esfe.BeautyTimeApp.modelos.Turno;
 import org.esfe.BeautyTimeApp.servicios.interfaces.ICupoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;

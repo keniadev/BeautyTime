@@ -1,5 +1,6 @@
 package org.esfe.BeautyTimeApp.servicios.interfaces;
 
+import org.esfe.BeautyTimeApp.dtos.CitaDTO;
 import org.esfe.BeautyTimeApp.modelos.Cita;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,6 @@ public interface ICitaService {
     Cita crearOEditar(Cita cita);
 
     void eliminarPorId(Integer id);
+
+    List<CitaDTO> listarPorUsuario(Integer usuarioId);
 }

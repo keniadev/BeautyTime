@@ -1,14 +1,154 @@
+/* Paleta de colores femeninos y elegantes */
+:root {
+    --primary-color: #6a0572;      /* Violeta profundo */
+    --secondary-color: #f7a399;    /* Rosa suave */
+    --accent-color: #e7b483;       /* Dorado claro para acentos */
+    --background-color: #fcf4f5;   /* Rosa muy claro */
+    --header-background: #fff;
+    --footer-background: #5b4a6b;  /* Ciruela oscuro */
+}
 
-.menu-logo{
+/* Estilos de la fuente principal */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
     display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.nav{
+/* ----------------------------------- */
+/* Estilos del Header                  */
+/* ----------------------------------- */
+
+#header {
+    background-color: var(--header-background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1rem 2rem;
+}
+
+.menu-logo {
     display: flex;
+    justify-content: space-between; /* Espacia el logo, nav y botones */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
-.nav-item{
 
-    color: aqua;
+.div-logo h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.8rem;
 }
-a{
+
+.nav {
+    display: flex;
+    flex-grow: 1; /* Permite que el nav ocupe el espacio restante */
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul li {
+    padding: 0 1rem;
+}
+
+.nav-link, a {
     text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+
+/* ----------------------------------- */
+/* Estilos de los Botones de Auth      */
+/* ----------------------------------- */
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn-auth {
+    padding: 0.7rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-register {
+    background-image: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+    color: #fff;
+    border: none;
+    background-size: 200% 100%;
+    transition: background-position 0.5s ease, box-shadow 0.3s ease;
+}
+
+.btn-register:hover {
+    background-position: -100% 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ----------------------------------- */
+/* Estilos del Footer                  */
+/* ----------------------------------- */
+
+#footer {
+    background-color: var(--footer-background);
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: auto; /* Empuja el footer hacia abajo */
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-slogan {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
