@@ -25,14 +25,14 @@ public class EstadoCitaController {
         return "/estados-cita/index";
     }
 
-    // Mostrar formulario de creación
+    //formulario de creación
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("estadoCita", new EstadoCita());
         return "/estados-cita/crearOeditar";
     }
 
-    // Guardar nuevo estado de cita
+    // Guarda nuevo estado de cita
     @PostMapping("/guardar")
     public String guardarEstadoCita(@ModelAttribute EstadoCita estadoCita, RedirectAttributes ra) {
         try {

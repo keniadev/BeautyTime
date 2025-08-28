@@ -18,6 +18,6 @@ public interface IServicioService {
     Servicio crearOEditar(Servicio servicio);
 
     void eliminarPorId(Integer id);
-// SE AGREGO ESE PARA OBTERNR LOS SERVICIOS POR CATGORIA
+
     List<Servicio> obtenerServiciosPorCategoria(Integer id);
 }

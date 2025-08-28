@@ -45,7 +45,8 @@ public class ServicioService implements IServicioService{
 
     @Override
     public List<Servicio> obtenerServiciosPorCategoria(Integer categoriaId) {
-        // Necesitarás crear este método en el repositorio
-        return ServicioRepository.findByCategoriaId(categoriaId);
+        return ServicioRepository.findServiciosPorCategoria(categoriaId);
     }
+
+
 }

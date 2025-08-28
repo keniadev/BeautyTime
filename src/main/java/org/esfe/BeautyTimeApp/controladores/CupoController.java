@@ -22,8 +22,6 @@ public class CupoController {
     @Autowired
     private ICupoService cupoService;
 
-    // ------------------- CRUD -------------------
-
     @GetMapping("/todos")
     @ResponseBody
     public List<Cupo> obtenerTodos() {
@@ -67,8 +65,6 @@ public class CupoController {
         }
         return ResponseEntity.notFound().build();
     }
-
-    // ------------------- Ajax / Disponibilidad -------------------
 
     @GetMapping("/disponibles")
     @ResponseBody

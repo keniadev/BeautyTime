@@ -1,0 +1,219 @@
+/* Estilos generales de la página */
+body {
+    background-color: #f7f7f7;
+    font-family: 'Poppins', sans-serif;
+}
+
+.category-header h1 {
+    color: #e83e8c;
+    font-weight: 700;
+}
+
+.category-header p {
+    color: #6c757d;
+}
+
+/* Estilos para las tarjetas de servicio */
+.service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #e9ecef;
+    position: relative;
+    z-index: 1;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffe0f0, #e9e0ff); /* Degradado de fondo */
+}
+
+.service-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 1.5rem 3.5rem rgba(214, 51, 132, 0.25) !important;
+    border-color: #e83e8c;
+}
+
+.service-gallery {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+}
+
+.thumbnail-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.thumbnail-container.active-thumbnail {
+    opacity: 1;
+}
+
+.service-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    color: #bdbdbd;
+    font-size: 4rem;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-body {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: #495057;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #6c757d;
+}
+
+.service-details {
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.price-tag {
+    font-size: 1.1rem;
+    background: linear-gradient(45deg, #ff69b4, #e83e8c); /* Degradado para el precio */
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.duration-tag {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+
+#imageModal .modal-content {
+    background: transparent;
+    border: none;
+    position: relative;
+}
+
+#imageModal .modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#imageModal .modal-image {
+    max-width: 100%;
+    max-height: 80vh;
+}
+
+#imageModal .btn-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    padding: 0.5rem;
+    opacity: 1;
+}
+
+.btn-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-nav:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn-prev {
+    left: 1rem;
+}
+
+.btn-next {
+    right: 1rem;
+}
+
+
+.agendar-cita {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    z-index: 1050;
+}
+
+.btn-agendar {
+    background: linear-gradient(135deg, #FF69B4 0%, #BA55D3 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-agendar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-decoration: none;
+    color: #fff;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #FF69B4 0%, #BA55D3 100%);
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    text-decoration: none;
+    color: #fff;
+}

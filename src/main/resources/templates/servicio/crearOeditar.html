@@ -4,78 +4,13 @@
       layout:decorate="~{layouts/_mainLayout}">
 <head>
   <title th:text="${servicio.id != null} ? 'Editar Servicio' : 'Crear Servicio'">Formulario Servicio</title>
-  <style>
-    .card {
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.1) !important;
-    }
-    .card-header {
-      background: linear-gradient(135deg, #6c5ce7, #a29bfe) !important;
-      color: white;
-      border-bottom: none;
-    }
-    .form-label {
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: #2d3436;
-    }
-    .form-control, .form-select {
-      border-radius: 8px;
-      padding: 12px 16px;
-      border: 1px solid #ddd;
-      transition: all 0.3s;
-    }
-    .form-control:focus, .form-select:focus {
-      border-color: #6c5ce7;
-      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-      border: none;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #5b4ee0, #8f88fc);
-      transform: translateY(-2px);
-    }
-    .btn-outline-secondary {
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    .btn-outline-secondary:hover {
-      transform: translateY(-2px);
-    }
-    .required-field::after {
-      content: " *";
-      color: #e84118;
-    }
-    .input-icon {
-      position: relative;
-    }
-    .input-icon i {
-      position: absolute;
-      left: 12px;
-      top: 42px;
-      color: #6c5ce7;
-    }
-    .input-icon input {
-      padding-left: 40px;
-    }
+
+
   </style>
 </head>
 <body>
 
-<div layout:fragment="content">
+<div layout:fragment="content-placeholder">
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-md-8">
