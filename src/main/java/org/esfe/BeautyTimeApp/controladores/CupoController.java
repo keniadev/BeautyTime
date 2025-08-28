@@ -22,6 +22,8 @@ public class CupoController {
     @Autowired
     private ICupoService cupoService;
 
+    // ------------------- CRUD -------------------
+
     @GetMapping("/todos")
     @ResponseBody
     public List<Cupo> obtenerTodos() {
@@ -66,7 +68,9 @@ public class CupoController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/disponibles")
+    // ------------------- cupos disponibles-------------------
+
+    @GetMapping("/cupos-disponibles")
     @ResponseBody
     public List<CupoDTO> obtenerCuposDisponibles(
             @RequestParam("servicioId") Integer servicioId,

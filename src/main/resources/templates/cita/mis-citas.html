@@ -1,4 +1,4 @@
-/<html lang="es"
+<html lang="es"
        xmlns:th="http://www.thymeleaf.org"
        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
        layout:decorate="~{layouts/_mainLayout}">
@@ -9,8 +9,6 @@
 <div layout:fragment="content">
   <div class="appointments-container">
     <h2 class="appointments-title">Mis Citas</h2>
-
-    <!-- Si hay citas -->
     <div class="appointments-list" th:if="${!#lists.isEmpty(citas)}">
       <div class="appointment-card"
            th:each="cita : ${citas}">
@@ -34,8 +32,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Si no hay citas -->
     <div class="no-appointments" th:if="${#lists.isEmpty(citas)}">
       <p>No tienes citas registradas.</p>
     </div>

@@ -46,7 +46,7 @@ public class Cupo {
         this.turno = turno;
     }
 
-    // getters y setters
+  
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
