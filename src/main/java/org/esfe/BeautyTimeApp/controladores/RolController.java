@@ -25,8 +25,8 @@ public class RolController {
 
     public  String index(Model model, @RequestParam("Page") Optional<Integer> page, @RequestParam("size")Optional<Integer> size){
 
-        int currentPage = page.orElse( 1) - 1; // si no esta setreado se asigna el 0
-        int pageSize = size.orElse(5); //tamaño de la pagina se asigan 5
+        int currentPage = page.orElse( 1) - 1;
+        int pageSize = size.orElse(5);
         Pageable pageable = PageRequest.of(currentPage,pageSize);
 
         Page<Rol> roles = rolService.buscarTodosPaginados(pageable);

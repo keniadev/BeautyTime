@@ -22,36 +22,9 @@ public class HomeController {
     private ICategoriaService categoriaService;
 
     @GetMapping
-
     public String index(Model model) {
-        try {
-            List<Categoria> categorias = categoriaService.ObtenerTodos();
-
-            if (categorias == null || categorias.isEmpty()) {
-                categorias = getCategoriasMock();
-            }
-
-            model.addAttribute("categorias", categorias);
-
-        } catch (Exception e) {
-            model.addAttribute("categorias", getCategoriasMock());
-        }
-
-        return "home/index"; // 👈 SOLO muestra categorías en la página principal
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "usuario/login"; // ruta: templates/usuario/login.html
-    }
-    // Mock temporal de categorías
-    private List<Categoria> getCategoriasMock() {
-        return Arrays.asList(
-                new Categoria(1, "Uñas"),
-                new Categoria(2, "Cabello"),
-                new Categoria(3, "Maquillaje"),
-                new Categoria(4, "Skincare"),
-                new Categoria(5, "Depilación")
-        );
+        List<Categoria> categorias = categoriaService.ObtenerTodos();
+        model.addAttribute("categorias", categorias);
+        return "home/index"; // 👈 Muestra las categorías al usuario
     }
 }

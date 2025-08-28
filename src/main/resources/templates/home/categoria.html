@@ -5,89 +5,30 @@
       layout:decorate="~{layouts/_mainLayout}">
 <head>
     <link th:href="@{/css/categoria.css}" rel="stylesheet">
+    <title>Categorías - BeautyTime</title>
 </head>
 <body>
-<div layout:fragment="content-placeholder">
-
-    <!-- HEADER -->
-    <header id="custom-header" class="bg-white shadow-sm py-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <h2 class="text-primary mb-0 logo-click">BeautyTime</h2>
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar servicios..." id="buscadorInput">
-                        <select class="form-select" style="max-width: 150px;" id="filtroSelect">
-                            <option value="todas">Todas</option>
-                            <option value="uñas">Uñas</option>
-                            <option value="cabello">Cabello</option>
-                            <option value="maquillaje">Maquillaje</option>
-                            <option value="skincare">Skincare</option>
-                            <option value="depilacion">Depilación</option>
-                        </select>
-                        <button class="btn btn-primary" type="button" id="btnBuscar">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-md-3 text-end">
-                    <button class="btn btn-outline-primary me-2">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> Crear Cuenta
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- RUTA DE NAVEGACIÓN -->
-    <div class="container mt-4">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
-                <li class="breadcrumb-item active">Servicios</li>
-            </ol>
-        </nav>
-    </div>
-
-    <!-- SERVICIOS DE LA CATEGORÍA -->
-    <div class="container mt-4">
-        <h2 class="text-center mb-4">Servicios Disponibles</h2>
-
-        <div class="row" id="serviciosContainer">
-            <!-- Iteración de servicios -->
-            <div th:each="servicio : ${servicios}" class="col-md-4 mb-4">
-                <div class="card servicio-card h-100 shadow-sm">
-                    <img th:src="@{/assets/img/servicio-default.jpg}"
-                         onerror="this.src='https://via.placeholder.com/300x200?text=Servicio'"
-                         class="card-img-top" alt="Servicio">
-                    <div class="card-body d-flex flex-column">
-                        <h5 th:text="${servicio.nombreServicio}" class="card-title"></h5>
-                        <p th:text="${servicio.descripcion}" class="card-text"></p>
-
-                        <div class="servicio-info mt-auto">
-                            <div class="d-flex justify-content-between">
-                                <span class="text-muted">
-                                    <i class="fas fa-clock"></i>
-                                    <span th:text="${servicio.duracion + ' min'}"></span>
-                                </span>
-                                <span class="text-primary fw-bold">
-                                    <i class="fas fa-dollar-sign"></i>
-                                    <span th:text="${servicio.precio}"></span>
-                                </span>
-                            </div>
+<div layout:fragment=content-placeholder">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Nuestras Categorías</h2>
+        <div class="row g-4 justify-content-center" id="categoriasContainer">
+            <div th:each="categoria : ${categorias}" class="col-6 col-md-4 col-lg-3 categoria-item"
+                 th:onclick="|window.location.href='/catalogo/categoria/' + ${categoria.id}|">
+                <div class="card categoria-card h-100 shadow-sm p-3 text-center">
+                    <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                        <div class="icon-circle mb-3 d-flex align-items-center justify-content-center">
+                            <i th:if="${categoria.nombreCategoria == 'Uñas'}" class="fas fa-hand-sparkles fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Cabello'}" class="fas fa-cut fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Maquillaje'}" class="fas fa-palette fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Skincare'}" class="fas fa-spa fa-2x"></i>
+                            <i th:if="${categoria.nombreCategoria == 'Depilación'}" class="fas fa-feather-alt fa-2x"></i>
                         </div>
-
+                        <h5 class="card-title fw-bold" th:text="${categoria.nombreCategoria}"></h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>
