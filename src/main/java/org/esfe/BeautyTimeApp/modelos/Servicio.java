@@ -16,7 +16,6 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @NotBlank
     @Size(max = 100)
     @Column(name="nombre_servicio", nullable = false, length = 100)
@@ -35,6 +34,10 @@ public class Servicio {
     @Column(nullable = false)
     private int duracion;
 
+    // 🔹 Nuevo campo
+    @Column(name = "imagen_url", length = 255)
+    private String imagenUrl;
+
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id", nullable = false)
@@ -50,7 +53,7 @@ public class Servicio {
         this.categoria = categoria;
     }
 
-    // getters y setters
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
@@ -69,4 +72,6 @@ public class Servicio {
     public Categoria getCategoria() { return categoria; }
     public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 
+    public String getImagenUrl() { return imagenUrl; }
+    public void setImagenUrl(String imagenUrl) { this.imagenUrl = imagenUrl; }
 }

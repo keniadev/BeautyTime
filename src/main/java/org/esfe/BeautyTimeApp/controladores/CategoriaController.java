@@ -17,13 +17,13 @@ public class CategoriaController {
     @Autowired
     private ICategoriaService categoriaService;
 
-    // Muestra todas las categorías - RETORNA LA VISTA DE CATEGORÍAS
+    // Muestra todas las categorías
     @GetMapping
     public String listarCategorias(Model model) {
         List<Categoria> categorias = categoriaService.ObtenerTodos();
         model.addAttribute("categorias", categorias);
-        model.addAttribute("categoria", new Categoria()); // Para el formulario
-        return "categorias/index"; // Retorna a la vista categorias/index.html
+        model.addAttribute("categoria", new Categoria());
+        return "categorias/index"; //
     }
 
     // Formulario de creación de una categoría
@@ -42,7 +42,7 @@ public class CategoriaController {
         } catch (Exception e) {
             ra.addFlashAttribute("error", "Error al guardar la categoría.");
         }
-        return "redirect:/categorias"; // Redirige al listado de categorías
+        return "redirect:/categorias";
     }
 
     // Formulario para editar una categoría
@@ -61,6 +61,6 @@ public class CategoriaController {
         } catch (Exception e) {
             ra.addFlashAttribute("error", "Error al eliminar la categoría.");
         }
-        return "redirect:/categorias"; // Redirige al listado de categorías
+        return "redirect:/categorias";
     }
 }
