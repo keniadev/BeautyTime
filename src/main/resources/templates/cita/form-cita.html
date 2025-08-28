@@ -2,68 +2,131 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/_mainLayout}">
+<head>
+
+    <link rel="stylesheet" href="/css/form-cita.css">
+</head>
 <body>
 <div layout:fragment="content">
+    <div class="appointment-container">
 
-    <h2>Agendar Cita</h2>
+        <h2 class="appointment-title">Agendar Cita</h2>
 
-    <!-- Datos del usuario -->
-    <div>
-        <label>Usuario:</label>
-        <span th:text="${usuario.nombre}"></span> <span th:text="${usuario.apellido}"></span>
+        <div class="user-info">
+            Nombre: <span class="user-name" th:text="${usuario.nombre}"></span> <span class="user-name" th:text="${usuario.apellido}"></span>
+        </div>
+        <form class="appointment-form" th:action="@{/citas/confirmar}" method="post" id="appointmentForm" novalidate>
+            <input type="hidden" name="usuarioId" th:value="${usuario.id}"/>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono"
+                       placeholder="Tu teléfono"
+                       pattern="[0-9]{8,15}"
+                       title="El teléfono debe tener entre 8 y 15 dígitos y solo números"
+                       required/>
+            </div>
+
+
+            <div class="form-group">
+                <label for="servicio">Servicio:</label>
+                <select id="servicio" name="servicioId" required>
+                    <option value="">Selecciona un servicio</option>
+                    <option th:each="serv : ${servicios}"
+                            th:value="${serv.id}"
+                            th:text="${serv.nombreServicio}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha de la cita:</label>
+                <input type="date" id="fecha" name="fecha" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="cupos">Cupos disponibles:</label>
+                <select name="cupoId" id="cupos" required>
+                    <option value="">Selecciona un servicio y una fecha</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="appointment-button submit-button">Agendar Cita</button>
+                <button type="button" class="appointment-button cancel-button" onclick="window.history.back();">Cancelar</button>
+            </div>
+        </form>
+
+
+        <div th:if="${error}" class="hidden-error" th:text="${error}"></div>
+
     </div>
 
-    <!-- Formulario -->
-    <form th:action="@{/citas/confirmar}" method="post">
-        <input type="hidden" name="usuarioId" th:value="${usuario.id}"/>
 
-        <!-- Teléfono -->
-        <div>
-            <label>Teléfono:</label>
-            <input type="text" name="telefono" placeholder="Tu teléfono" required/>
-        </div>
-
-        <!-- Servicio -->
-        <div>
-            <label>Servicio:</label>
-            <select id="servicio" name="servicioId" required>
-                <option value="">Selecciona un servicio</option>
-                <option th:each="serv : ${servicios}"
-                        th:value="${serv.id}"
-                        th:text="${serv.nombreServicio}"></option>
-            </select>
-        </div>
-
-        <!-- Fecha -->
-        <div>
-            <label>Fecha de la cita:</label>
-            <input type="date" id="fecha" name="fecha" required/>
-        </div>
-
-        <!-- Cupos -->
-        <div>
-            <label>Cupos disponibles:</label>
-            <select name="cupoId" id="cupos" required>
-                <option value="">Selecciona un servicio y una fecha</option>
-            </select>
-        </div>
-
-        <!-- Botones -->
-        <div>
-            <button type="submit">Agendar Cita</button>
-            <button type="button" onclick="window.history.back();">Cancelar</button>
-        </div>
-    </form>
-
-    <!-- Mensaje de error -->
-    <div th:if="${error}" style="color:red; margin-top:10px;">
-        <p th:text="${error}"></p>
-    </div>
-
-    <!-- JQuery para cargar cupos dinámicamente -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+
+
+$('#telefono').on('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
+    if (this.value.length > 15) {
+        this.value = this.value.substring(0, 15);
+    }
+});
+
+
+            $('#appointmentForm').on('submit', function(e) {
+
+                e.preventDefault();
+
+                const form = this;
+                let isValid = true;
+
+
+                $(form).find('[required]').each(function() {
+                    if (!$(this).val()) {
+                        isValid = false;
+                        return false; // Salir del bucle .each()
+                    }
+                });
+
+                if (!isValid) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Campos Vacíos',
+                        text: 'Por favor, completa todos los campos requeridos para agendar la cita.',
+                        confirmButtonColor: '#6a0572'
+                    });
+                } else {
+
+                    Swal.fire({
+                        title: '¿Confirmar Cita?',
+                        text: 'Una vez agendada, no podrás revertir esta acción fácilmente.',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#6a0572',
+                        cancelButtonColor: '#d1b1c6',
+                        confirmButtonText: 'Sí, agendar',
+                        cancelButtonText: 'No, cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Muestra un mensaje de éxito antes de enviar el formulario
+                            Swal.fire({
+                                title: '¡Éxito!',
+                                text: 'Tu cita ha sido agendada correctamente.',
+                                icon: 'success',
+                                confirmButtonColor: '#6a0572',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didClose: () => {
+                                    form.submit();
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
 
             function cargarCupos() {
                 var fecha = $('#fecha').val();
@@ -75,7 +138,7 @@
                         data: { fecha: fecha, servicioId: servicioId },
                         success: function(cupos) {
                             var cuposSelect = $('#cupos');
-                            var seleccionAnterior = cuposSelect.val(); // Guardamos lo que tenía seleccionado
+                            var seleccionAnterior = cuposSelect.val();
 
                             cuposSelect.empty();
                             if(cupos.length > 0) {
@@ -87,11 +150,10 @@
                                     );
                                 });
 
-                                // Restauramos la selección si aún existe
                                 if(seleccionAnterior && cuposSelect.find('option[value="' + seleccionAnterior + '"]').length > 0){
                                     cuposSelect.val(seleccionAnterior);
                                 } else {
-                                    cuposSelect.val(''); // Si ya no existe, limpiar selección
+                                    cuposSelect.val('');
                                 }
 
                             } else {
@@ -107,17 +169,11 @@
                     $('#cupos').html('<option value="">Selecciona un servicio y una fecha</option>');
                 }
             }
-
-            // Se ejecuta cuando cambian fecha o servicio
             $('#fecha').change(cargarCupos);
             $('#servicio').change(cargarCupos);
-
-            // Polling automático cada 5 segundos (1000 ms)
             setInterval(cargarCupos, 1000);
         });
     </script>
-
-
 </div>
 </body>
 </html>

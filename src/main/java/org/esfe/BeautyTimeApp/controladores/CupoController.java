@@ -1,5 +1,6 @@
 package org.esfe.BeautyTimeApp.controladores;
 
+
 import org.esfe.BeautyTimeApp.dtos.CupoDTO;
 import org.esfe.BeautyTimeApp.modelos.Cupo;
 import org.esfe.BeautyTimeApp.modelos.Servicio;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/cupos")
 public class CupoController {
 
     @Autowired
@@ -87,7 +87,9 @@ public class CupoController {
                 .toList();
     }
 
-    @PostMapping("/confirmar")
+
+
+    @PostMapping("/confirmar-cupo")
     @ResponseBody
     public String confirmarCupo(
             @RequestParam("servicioId") Integer servicioId,
@@ -103,9 +105,12 @@ public class CupoController {
 
             cupoService.ocuparCupo(servicio, fecha, turno);
 
-            return "Cupo confirmado con éxito";
+            return "Cupo confirmado con éxito ";
         } catch (RuntimeException e) {
-            return "Error: " + e.getMessage();
+            return " " + e.getMessage();
         }
     }
+
 }
+
+
