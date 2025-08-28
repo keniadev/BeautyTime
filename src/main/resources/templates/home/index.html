@@ -8,48 +8,13 @@
 <head>
     <!-- CSS específico de home -->
     <link th:href="@{/css/homepage.css}" rel="stylesheet">
+    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 <!-- Fragmento que se inyecta en el layout -->
-<div layout:fragment="content-placeholder">
-
-    <!-- HEADER TEMPORAL PARA MOCKS -->
-    <header id="custom-header" class="bg-white shadow-sm py-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <h2 class="text-primary mb-0 logo-click">BeautyTime</h2>
-                </div>
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar servicios..." id="buscadorInput">
-                        <select class="form-select" style="max-width: 150px;" id="filtroSelect">
-                            <option value="todas">Todas</option>
-                            <option value="uñas">Uñas</option>
-                            <option value="cabello">Cabello</option>
-                            <option value="maquillaje">Maquillaje</option>
-                            <option value="skincare">Skincare</option>
-                            <option value="depilacion">Depilación</option>
-                        </select>
-                        <button class="btn btn-primary" type="button" id="btnBuscar">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-md-3 text-end">
-                    <button class="btn btn-outline-primary me-2">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </button>
-                    <button class="btn btn-primary">
-                        <i class="fas fa-user-plus"></i> Crear Cuenta
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
+<div layout:fragment="content">
     <!-- BANNER CARRUSEL -->
     <div id="bannerCarrusel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">

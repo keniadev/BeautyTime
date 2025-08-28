@@ -68,9 +68,9 @@ public class CupoController {
         return ResponseEntity.notFound().build();
     }
 
-    // ------------------- Ajax / Disponibilidad -------------------
+    // ------------------- cupos disponibles-------------------
 
-    @GetMapping("/disponibles")
+    @GetMapping("/cupos-disponibles")
     @ResponseBody
     public List<CupoDTO> obtenerCuposDisponibles(
             @RequestParam("servicioId") Integer servicioId,

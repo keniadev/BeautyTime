@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="es"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Beauty Time</title>
-    <!-- Incluye el CSS de tu layout y las librerías -->
+    <!-- CSS -->
     <link th:href="@{/css/layout.css}" rel="stylesheet" />
-    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" /> <!-- Esta línea -->
-    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Importa una fuente elegante para los títulos y botones -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
+
+    <!-- Bootstrap -->
+    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -26,20 +30,26 @@
 
         <nav class="nav">
             <ul>
-                <li><a class="nav-link" href="#">Inicio</a></li>
-            </ul>
-            <ul>
-                <li><a class="nav-link" href="#">Mis Citas</a></li>
-            </ul>
-            <ul>
-                <li><a class="nav-link" href="#">Panel Administrativo</a></li>
+                <li><a class="nav-link" th:href="@{/}">Inicio</a></li>
+                <li><a class="nav-link" th:href="@{/citas/mis-citas}">Mis Citas</a></li>
+                <li><a class="nav-link" th:href="@{/categorias}">Panel Administrativo</a></li>
             </ul>
         </nav>
 
-        <!-- Contenedor para los botones de autenticación -->
+        <!-- Contenedor de autenticación -->
         <div class="auth-buttons">
-            <a href="#" class="btn-auth btn-login">Iniciar Sesión</a>
-            <a href="#" class="btn-auth btn-register">Registro</a>
+
+            <!-- Mostrar solo si NO está autenticado -->
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="@{/usuarios/create}" class="btn-auth btn-register">Registro</a>
+                <a th:href="@{/login}" class="btn-auth btn-login">Iniciar Sesión</a>
+            </div>
+
+            <!-- Mostrar solo si SÍ está autenticado -->
+            <div sec:authorize="isAuthenticated()">
+                <span class="user-welcome">Bienvenido/a a BeautyTime</span>
+            </div>
+
         </div>
     </div>
 </header>
@@ -47,23 +57,17 @@
 <!-- Fragmento que cambiará según la vista -->
 <div layout:fragment="content"></div>
 
-<!-- Nuevo footer elegante -->
 <footer id="footer">
     <div class="footer-content">
-        <p>
-            &copy; <span id="current-year"></span> BeautyTime. Todos los derechos reservados.
-        </p>
-        <p class="footer-slogan">
-            Tu belleza, nuestra prioridad.
-        </p>
+        <p>&copy; <span id="current-year"></span> BeautyTime. Todos los derechos reservados.</p>
+        <p class="footer-slogan">Tu belleza, nuestra prioridad.</p>
     </div>
 </footer>
 
-<!-- jQuery, Popper.js, y Bootstrap JS -->
+<!-- Scripts -->
 <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/scripts.js}"></script>
-
 
 <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();

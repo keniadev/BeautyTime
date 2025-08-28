@@ -40,6 +40,10 @@ public class HomeController {
         return "home/index"; // 👈 SOLO muestra categorías en la página principal
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "usuario/login"; // ruta: templates/usuario/login.html
+    }
     // Mock temporal de categorías
     private List<Categoria> getCategoriasMock() {
         return Arrays.asList(
