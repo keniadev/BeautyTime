@@ -30,7 +30,6 @@ public interface ICupoRepository extends JpaRepository<Cupo, Integer> {
 
     List<Cupo> findByServicioAndFecha(Servicio servicio, LocalDate fecha);
 
-    // Buscar cupo específico
     Optional<Cupo> findByServicioAndFechaAndTurno(Servicio servicio, LocalDate fecha, Turno turno);
 
 

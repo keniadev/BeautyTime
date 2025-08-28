@@ -35,7 +35,6 @@ public class CitaController {
     @Autowired
     private IUsuarioService usuarioService;
 
-    // 🔹 Método privado para obtener el usuario logueado
     private Usuario getUsuarioLogueado() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
@@ -47,10 +46,10 @@ public class CitaController {
                 .orElseThrow(() -> new RuntimeException("Usuario logueado no encontrado"));
     }
 
-    // 🔹 Mostrar formulario de cita
+
     @GetMapping("/form")
     public String mostrarFormularioCita(Model model) {
-        Usuario usuario = getUsuarioLogueado(); // 👈 Usuario logueado
+        Usuario usuario = getUsuarioLogueado();
         List<Servicio> servicios = servicioService.ObtenerTodos();
 
         model.addAttribute("usuario", usuario);
@@ -60,7 +59,6 @@ public class CitaController {
         return "cita/form-cita";
     }
 
-    // 🔹 Confirmar cita (POST)
     @PostMapping("/confirmar")
     public String confirmarCita(
             @RequestParam("telefono") String telefono,
@@ -68,17 +66,17 @@ public class CitaController {
             Model model
     ) {
         try {
-            Usuario usuario = getUsuarioLogueado(); // 👈 Usuario actual
+            Usuario usuario = getUsuarioLogueado();
             Cupo cupo = cupoService.BuscarPorId(cupoId)
                     .orElseThrow(() -> new RuntimeException("Cupo no encontrado"));
 
-            // Ocupa el cupo
+
             cupoService.ocuparCupo(cupo.getServicio(), cupo.getFecha(), cupo.getTurno());
 
             EstadoCita estadoPendiente = estadoCitaService.buscarPorNombre("Pendiente")
                     .orElseThrow(() -> new RuntimeException("Estado pendiente no encontrado"));
 
-            // Crear la cita
+
             Cita cita = new Cita();
             cita.setUsuario(usuario);
             cita.setTelefono(telefono);
