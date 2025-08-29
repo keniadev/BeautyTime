@@ -27,6 +27,7 @@
         <div class="div-logo">
             <h2>BeautyTime</h2>
         </div>
+
         <nav class="nav">
             <ul>
                 <li><a class="nav-link" th:href="@{/}">Inicio</a></li>
@@ -44,10 +45,16 @@
                 <a th:href="@{/login}" class="btn-auth btn-login">Iniciar Sesión</a>
             </div>
 
-            <!-- Mostrar solo si SÍ está autenticado -->
+
             <div sec:authorize="isAuthenticated()">
-                <span class="user-welcome">Bienvenido/a a BeautyTime</span>
+                <span class="user-welcome me-2">Bienvenido/a a BeautyTime</span>
+
+                <!-- Botón de cerrar sesión con confirmación -->
+                <form th:action="@{/logout}" method="post" style="display:inline;" onsubmit="return confirm('¿Seguro que quieres cerrar sesión?');">
+                    <button type="submit" class="btn btn-danger btn-logout">Cerrar Sesión</button>
+                </form>
             </div>
+
 
         </div>
     </div>
