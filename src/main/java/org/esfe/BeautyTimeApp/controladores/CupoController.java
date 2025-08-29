@@ -30,7 +30,7 @@ public class CupoController {
         return cupoService.ObtenerTodos();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/cupos/{id}")
     @ResponseBody
     public ResponseEntity<Cupo> obtenerPorId(@PathVariable Integer id) {
         Optional<Cupo> cupo = cupoService.BuscarPorId(id);

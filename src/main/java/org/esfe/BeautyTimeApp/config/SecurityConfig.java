@@ -34,10 +34,11 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/css/**",
                                 "/js/**",
-                                "/images/**",
+                                "/assets/**",
                                 "/webjars/**",
-                                "/",
-                                "/login",
+                                "/",             // página principal
+                                "/login",        // login
+                                "/error",        // para evitar loop en error
                                 "/usuarios/create",
                                 "/usuarios/save"
                         ).permitAll()
@@ -49,14 +50,15 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("correo")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/", true) // Redirige a /home tras login exitoso
+                        .defaultSuccessUrl("/", true) // siempre redirige a "/" después de login
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutSuccessUrl("/")
                         .permitAll()
                 );
+
         return http.build();
     }
 }
