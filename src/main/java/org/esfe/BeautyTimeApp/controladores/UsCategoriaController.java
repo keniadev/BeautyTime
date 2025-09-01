@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/catalogo") // todas las rutas empiezan con /catalogo
+@RequestMapping("/catalogo")
 public class UsCategoriaController {
 
     @Autowired
@@ -26,9 +26,9 @@ public class UsCategoriaController {
     // Lista todas las categorías
     @GetMapping("/categorias")
     public String listarCategorias(Model model) {
-        List<Categoria> categorias = categoriaService.ObtenerTodos(); // obtenemos todas las categorías
-        model.addAttribute("categorias", categorias); // agregamos al modelo
-        return "home/categorias"; // vista HTML que mostrará las categorías
+        List<Categoria> categorias = categoriaService.ObtenerTodos();
+        model.addAttribute("categorias", categorias);
+        return "home/categorias";
     }
 
     // Muestra los servicios de una categoría
