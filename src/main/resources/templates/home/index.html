@@ -6,14 +6,16 @@
       layout:decorate="~{layouts/_mainLayout}">
 
 <head>
+    <!-- CSS específico de home -->
     <link th:href="@{/css/homepage.css}" rel="stylesheet">
+    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<div layout:fragment="content-placeholder">
-
+<!-- Fragmento que se inyecta en el layout -->
+<div layout:fragment="content">
 
     <!-- BANNER CARRUSEL -->
     <div id="bannerCarrusel" class="carousel slide" data-bs-ride="carousel">
@@ -63,7 +65,6 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
     </div>
-
     <!-- SECCIÓN DE CATEGORÍAS -->
     <div class="container mt-5">
         <h2 class="text-center mb-2 fw-bold">Nuestras Categorías</h2>

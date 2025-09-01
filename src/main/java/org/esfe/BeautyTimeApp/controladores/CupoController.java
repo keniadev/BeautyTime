@@ -1,5 +1,6 @@
 package org.esfe.BeautyTimeApp.controladores;
 
+
 import org.esfe.BeautyTimeApp.dtos.CupoDTO;
 import org.esfe.BeautyTimeApp.modelos.Cupo;
 import org.esfe.BeautyTimeApp.modelos.Servicio;
@@ -16,11 +17,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/cupos")
 public class CupoController {
 
     @Autowired
     private ICupoService cupoService;
+
+    // ------------------- CRUD -------------------
 
     @GetMapping("/todos")
     @ResponseBody
@@ -28,7 +30,7 @@ public class CupoController {
         return cupoService.ObtenerTodos();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/cupos/{id}")
     @ResponseBody
     public ResponseEntity<Cupo> obtenerPorId(@PathVariable Integer id) {
         Optional<Cupo> cupo = cupoService.BuscarPorId(id);
@@ -66,7 +68,9 @@ public class CupoController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/disponibles")
+    // ------------------- cupos disponibles-------------------
+
+    @GetMapping("/cupos-disponibles")
     @ResponseBody
     public List<CupoDTO> obtenerCuposDisponibles(
             @RequestParam("servicioId") Integer servicioId,
@@ -87,7 +91,9 @@ public class CupoController {
                 .toList();
     }
 
-    @PostMapping("/confirmar")
+
+
+    @PostMapping("/confirmar-cupo")
     @ResponseBody
     public String confirmarCupo(
             @RequestParam("servicioId") Integer servicioId,
@@ -103,9 +109,12 @@ public class CupoController {
 
             cupoService.ocuparCupo(servicio, fecha, turno);
 
-            return "Cupo confirmado con éxito";
+            return "Cupo confirmado con éxito ";
         } catch (RuntimeException e) {
-            return "Error: " + e.getMessage();
+            return " " + e.getMessage();
         }
     }
+
 }
+
+

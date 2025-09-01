@@ -23,7 +23,7 @@ public class CategoriaController {
         List<Categoria> categorias = categoriaService.ObtenerTodos();
         model.addAttribute("categorias", categorias);
         model.addAttribute("categoria", new Categoria());
-        return "categorias/index"; //
+        return "categorias/index";
     }
 
     // Formulario de creación de una categoría

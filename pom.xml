@@ -70,13 +70,12 @@
 			<version>3.3.11</version>
 		</dependency>
 
-<!--		logirase para poder entra a la app-->
-<!--	requerido para trabajar Sprintg Security&ndash;&gt;
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 
-		</dependency>-->
+		</dependency>
 
 		<!-- Agrega esto en la sección <dependencies> -->
 		<dependency>

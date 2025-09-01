@@ -1,0 +1,41 @@
+<html lang="es"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{layouts/_mainLayout}">
+<head>
+  <link rel="stylesheet" href="/css/mis-citas.css">
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="appointments-container">
+    <h2 class="appointments-title">Mis Citas</h2>
+    <div class="appointments-list" th:if="${!#lists.isEmpty(citas)}">
+      <div class="appointment-card"
+           th:each="cita : ${citas}">
+        <div class="card-header">
+          <h3 th:text="${cita.nombreUsuario}">Nombre Usuario</h3>
+        </div>
+        <div class="card-body">
+          <p><strong>Teléfono:</strong> <span th:text="${cita.telefono}"></span></p>
+          <p><strong>Servicio:</strong> <span th:text="${cita.servicioNombre}"></span></p>
+          <p><strong>Turno:</strong> <span th:text="${cita.turno}"></span></p>
+          <p>
+            <strong>Hora:</strong>
+            <span th:text="${cita.horaInicio}"></span> -
+            <span th:text="${cita.horaFin}"></span>
+          </p>
+          <p>
+            <strong>Estado:</strong>
+            <span class="estado"
+                  th:text="${cita.estado}"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="no-appointments" th:if="${#lists.isEmpty(citas)}">
+      <p>No tienes citas registradas.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

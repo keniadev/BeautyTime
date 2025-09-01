@@ -1,48 +1,83 @@
 <!DOCTYPE html>
 <html lang="es"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Beauty Time</title>
+    <!-- CSS -->
     <link th:href="@{/css/layout.css}" rel="stylesheet" />
-    <link th:href="@{/css/categorias-cards.css}" rel="stylesheet" /> <!-- Esta línea -->
-    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
 
+
+    <!-- Bootstrap -->
+    <link th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" rel="stylesheet">
+
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
 <body>
 
-<header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-  
+<header id="header">
+    <div class="menu-logo">
+        <div class="div-logo">
+            <h2>BeautyTime</h2>
+        </div>
+
         <nav class="nav">
             <ul>
-                <li><a href="#">Inicio</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Mis Citas</a></li>
-            </ul>
-            <ul>
-                <li><a th:href="@{/categorias}">Panel Administrativo</a></li>
+                <li><a class="nav-link" th:href="@{/}">Inicio</a></li>
+                <li><a class="nav-link" th:href="@{/citas/mis-citas}">Mis Citas</a></li>
+                <li><a class="nav-link" th:href="@{/categorias}">Panel Administrativo</a></li>
             </ul>
         </nav>
 
+        <!-- Contenedor de autenticación -->
+        <div class="auth-buttons">
+
+            <!-- Mostrar solo si NO está autenticado -->
+            <div sec:authorize="!isAuthenticated()">
+                <a th:href="@{/usuarios/create}" class="btn-auth btn-register">Registro</a>
+                <a th:href="@{/login}" class="btn-auth btn-login">Iniciar Sesión</a>
+            </div>
+
+
+            <div sec:authorize="isAuthenticated()">
+                <span class="user-welcome me-2">Bienvenido/a a BeautyTime</span>
+
+                <!-- Botón de cerrar sesión con confirmación -->
+                <form th:action="@{/logout}" method="post" style="display:inline;" onsubmit="return confirm('¿Seguro que quieres cerrar sesión?');">
+                    <button type="submit" class="btn btn-danger btn-logout">Cerrar Sesión</button>
+                </form>
+            </div>
+
+
+        </div>
     </div>
 </header>
 
-<main class="flex-grow-1" layout:fragment="content-placeholder">
-</main>
+<!-- Fragmento que cambiará según la vista -->
+<div layout:fragment="content"></div>
 
+<footer id="footer">
+    <div class="footer-content">
+        <p>&copy; <span id="current-year"></span> BeautyTime. Todos los derechos reservados.</p>
+        <p class="footer-slogan">Tu belleza, nuestra prioridad.</p>
+    </div>
+</footer>
 
-
-<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
+<!-- Scripts -->
 <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/js/scripts.js}"></script>
 
-
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>

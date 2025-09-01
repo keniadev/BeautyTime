@@ -2,122 +2,68 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/_mainLayout}">
+<head>
+
+    <link rel="stylesheet" href="/css/form-cita.css">
+</head>
 <body>
 <div layout:fragment="content">
+    <div class="appointment-container">
 
-    <h2>Agendar Cita</h2>
+        <h2 class="appointment-title">Agendar Cita</h2>
 
-    <!-- Datos del usuario -->
-    <div>
-        <label>Usuario:</label>
-        <span th:text="${usuario.nombre}"></span> <span th:text="${usuario.apellido}"></span>
+        <div class="user-info">
+            Nombre: <span class="user-name" th:text="${usuario.nombre}"></span> <span class="user-name" th:text="${usuario.apellido}"></span>
+        </div>
+        <form class="appointment-form" th:action="@{/citas/confirmar}" method="post" id="appointmentForm" novalidate>
+
+
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" name="telefono"
+                       placeholder="Tu teléfono"
+                       pattern="[0-9]{8,15}"
+                       title="El teléfono debe tener entre 8 y 15 dígitos y solo números"
+                       required/>
+            </div>
+
+
+            <div class="form-group">
+                <label for="servicio">Servicio:</label>
+                <select id="servicio" name="servicioId" required>
+                    <option value="">Selecciona un servicio</option>
+                    <option th:each="serv : ${servicios}"
+                            th:value="${serv.id}"
+                            th:text="${serv.nombreServicio}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha">Fecha de la cita:</label>
+                <input type="date" id="fecha" name="fecha" required/>
+            </div>
+
+            <div class="form-group">
+                <label for="cupos">Cupos disponibles:</label>
+                <select name="cupoId" id="cupos" required>
+                    <option value="">Selecciona un servicio y una fecha</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="appointment-button submit-button">Agendar Cita</button>
+                <button type="button" class="appointment-button cancel-button" onclick="window.history.back();">Cancelar</button>
+            </div>
+        </form>
+
+
+        <div th:if="${error}" class="hidden-error" th:text="${error}"></div>
+
     </div>
 
-    <!-- Formulario -->
-    <form th:action="@{/citas/confirmar}" method="post">
-        <input type="hidden" name="usuarioId" th:value="${usuario.id}"/>
 
-        <!-- Teléfono -->
-        <div>
-            <label>Teléfono:</label>
-            <input type="text" name="telefono" placeholder="Tu teléfono" required/>
-        </div>
-
-        <!-- Servicio -->
-        <div>
-            <label>Servicio:</label>
-            <select id="servicio" name="servicioId" required>
-                <option value="">Selecciona un servicio</option>
-                <option th:each="serv : ${servicios}"
-                        th:value="${serv.id}"
-                        th:text="${serv.nombreServicio}"></option>
-            </select>
-        </div>
-
-        <!-- Fecha -->
-        <div>
-            <label>Fecha de la cita:</label>
-            <input type="date" id="fecha" name="fecha" required/>
-        </div>
-
-        <!-- Cupos -->
-        <div>
-            <label>Cupos disponibles:</label>
-            <select name="cupoId" id="cupos" required>
-                <option value="">Selecciona un servicio y una fecha</option>
-            </select>
-        </div>
-
-        <!-- Botones -->
-        <div>
-            <button type="submit">Agendar Cita</button>
-            <button type="button" onclick="window.history.back();">Cancelar</button>
-        </div>
-    </form>
-
-    <!-- Mensaje de error -->
-    <div th:if="${error}" style="color:red; margin-top:10px;">
-        <p th:text="${error}"></p>
-    </div>
-
-    <!-- JQuery para cargar cupos dinámicamente -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-
-            function cargarCupos() {
-                var fecha = $('#fecha').val();
-                var servicioId = $('#servicio').val();
-
-                if(fecha && servicioId) {
-                    $.ajax({
-                        url: '/cupos-disponibles',
-                        data: { fecha: fecha, servicioId: servicioId },
-                        success: function(cupos) {
-                            var cuposSelect = $('#cupos');
-                            var seleccionAnterior = cuposSelect.val(); // Guardamos lo que tenía seleccionado
-
-                            cuposSelect.empty();
-                            if(cupos.length > 0) {
-                                cupos.forEach(function(cupo) {
-                                    cuposSelect.append(
-                                        $('<option></option>')
-                                            .val(cupo.id)
-                                            .text(cupo.nombreTurno + ' | ' + cupo.horaInicio + ' - ' + cupo.horaFin)
-                                    );
-                                });
-
-                                // Restauramos la selección si aún existe
-                                if(seleccionAnterior && cuposSelect.find('option[value="' + seleccionAnterior + '"]').length > 0){
-                                    cuposSelect.val(seleccionAnterior);
-                                } else {
-                                    cuposSelect.val(''); // Si ya no existe, limpiar selección
-                                }
-
-                            } else {
-                                cuposSelect.append('<option value="">No hay cupos disponibles</option>');
-                            }
-                        },
-                        error: function() {
-                            $('#cupos').empty();
-                            $('#cupos').append('<option value="">Error al cargar cupos</option>');
-                        }
-                    });
-                } else {
-                    $('#cupos').html('<option value="">Selecciona un servicio y una fecha</option>');
-                }
-            }
-
-            // Se ejecuta cuando cambian fecha o servicio
-            $('#fecha').change(cargarCupos);
-            $('#servicio').change(cargarCupos);
-
-            // Polling automático cada 5 segundos (1000 ms)
-            setInterval(cargarCupos, 1000);
-        });
-    </script>
-
-
+   <script src="/js/form-cita.js" defer></script>
 </div>
 </body>
 </html>

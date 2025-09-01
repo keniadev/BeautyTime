@@ -20,7 +20,8 @@ public class Cita {
     private Usuario usuario;
 
     @NotBlank
-    @Size(max = 20)
+    @Pattern(regexp = "^[0-9]+$", message = "El teléfono solo debe contener números")
+    @Size(min = 8, max = 15, message = "El teléfono debe tener entre 8 y 15 dígitos")
     @Column(length = 20)
     private String telefono;
 

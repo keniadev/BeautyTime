@@ -1,0 +1,167 @@
+/* Importar fuentes de Google Fonts para un diseño moderno */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+/* Paleta de Colores Femeninos y Variables */
+:root {
+    --primary-color: #6a0572; /* Un violeta oscuro y elegante */
+    --secondary-color: #f7a399; /* Rosa pálido para acentos */
+    --accent-color: #e74c3c; /* Rojo para mensajes de error */
+    --background-start: #f8c0c9; /* Rosa claro para el inicio del degradado */
+    --background-end: #d1b1c6; /* Lila para el final del degradado */
+    --card-background: #ffffff; /* Blanco limpio para el formulario */
+    --text-color: #4a4a4a; /* Gris oscuro para el texto principal */
+    --input-border-color: #d1b1c6; /* Borde suave para los campos */
+    --box-shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.2); /* Sombra más definida */
+}
+
+/* ------------------------------------- */
+/* Contenedor del Formulario           */
+/* ------------------------------------- */
+
+.appointment-container {
+    background-color: var(--card-background);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--box-shadow-strong);
+    width: 100%;
+    max-width: 550px;
+    box-sizing: border-box;
+    margin: 40px auto; /* Centra el formulario en el espacio del main layout */
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------- */
+/* Encabezado y Información del Usuario */
+/* ------------------------------------- */
+
+.appointment-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.user-info {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--background-start);
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.user-info .user-name {
+    font-weight: 600;
+    color: var(--primary-color); /* CAMBIO AQUÍ: Usando el color principal para mejor contraste */
+}
+
+/* ------------------------------------- */
+/* Formulario y Campos                 */
+/* ------------------------------------- */
+
+.appointment-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.appointment-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.appointment-form input,
+.appointment-form select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--input-border-color);
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background-color: var(--card-background);
+    color: var(--text-color);
+}
+
+.appointment-form input:focus,
+.appointment-form select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(247, 163, 153, 0.3);
+}
+
+/* ------------------------------------- */
+/* Botones                             */
+/* ------------------------------------- */
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.appointment-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-button:hover {
+    transform: translateY(-2px);
+}
+
+.submit-button {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.submit-button:hover {
+    background-color: #550460;
+}
+
+.cancel-button {
+    background-color: #f5eef1;
+    color: var(--primary-color);
+}
+
+.cancel-button:hover {
+    background-color: #e6dee0;
+}
+
+/* ------------------------------------- */
+/* Mensaje de Error                    */
+/* ------------------------------------- */
+
+.error-message {
+    color: var(--accent-color);
+    text-align: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-radius: 1rem;
+    border: 1px solid var(--accent-color);
+    font-weight: 500;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
