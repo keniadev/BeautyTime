@@ -36,9 +36,9 @@ public class SecurityConfig {
                                 "/js/**",
                                 "/assets/**",
                                 "/webjars/**",
-                                "/",             // página principal
-                                "/login",        // login
-                                "/error",        // para evitar loop en error
+                                "/",
+                                "/login",
+                                "/error",
                                 "/usuarios/create",
                                 "/usuarios/save"
                         ).permitAll()
@@ -50,7 +50,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("correo")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/", true) // siempre redirige a "/" después de login
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

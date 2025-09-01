@@ -1,0 +1,113 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Paleta de colores heredada del tema principal */
+:root {
+    --primary-color: #6a0572;
+    --secondary-color: #f7a399;
+    --accent-color: #e7b483;
+    --background-color: #fcf4f5;
+    --header-background: #fff;
+    --footer-background: #5b4a6b;
+}
+
+
+.registration-container {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease-in-out;
+}
+
+.registration-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Estilos para el formulario y sus elementos */
+.registration-form .row {
+    margin-bottom: 1.5rem;
+}
+
+.registration-form label {
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(247, 163, 153, 0.2);
+    outline: none;
+}
+
+/* Estilos de los botones de acción */
+.button-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.btn-primary {
+    padding: 1rem 2.5rem;
+    border: none;
+    background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    background-size: 200% 100%;
+    transition: background-position 0.5s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-position: -100% 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+    padding: 1rem 2.5rem;
+    border: 1px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+hr {
+    border-top: 2px solid var(--secondary-color);
+    opacity: 0.5;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}

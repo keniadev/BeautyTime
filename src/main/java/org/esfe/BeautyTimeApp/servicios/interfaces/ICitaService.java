@@ -2,6 +2,8 @@ package org.esfe.BeautyTimeApp.servicios.interfaces;
 
 import org.esfe.BeautyTimeApp.dtos.CitaDTO;
 import org.esfe.BeautyTimeApp.modelos.Cita;
+import org.esfe.BeautyTimeApp.modelos.Cupo;
+import org.esfe.BeautyTimeApp.modelos.Usuario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,4 +22,6 @@ public interface ICitaService {
     void eliminarPorId(Integer id);
 
     List<CitaDTO> listarPorUsuario(Integer usuarioId);
+
+    Cita crearCitaConCupo(Usuario usuario, String telefono, Cupo cupo);
 }

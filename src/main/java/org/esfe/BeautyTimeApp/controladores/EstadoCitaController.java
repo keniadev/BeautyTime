@@ -17,7 +17,6 @@ public class EstadoCitaController {
     @Autowired
     private IEstadoCitaService estadoCitaService;
 
-    // Listar todos los estados de cita
     @GetMapping
     public String listarEstadosCita(Model model) {
         List<EstadoCita> estados = estadoCitaService.ObtenerTodos();
@@ -25,14 +24,12 @@ public class EstadoCitaController {
         return "/estados-cita/index";
     }
 
-    //formulario de creación
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("estadoCita", new EstadoCita());
         return "/estados-cita/crearOeditar";
     }
 
-    // Guarda nuevo estado de cita
     @PostMapping("/guardar")
     public String guardarEstadoCita(@ModelAttribute EstadoCita estadoCita, RedirectAttributes ra) {
         try {
@@ -44,7 +41,6 @@ public class EstadoCitaController {
         return "redirect:/estados-cita";
     }
 
-    // Mostrar formulario de edición
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
         try {
@@ -58,7 +54,6 @@ public class EstadoCitaController {
         }
     }
 
-    // Elimina estado de cita
     @GetMapping("/eliminar/{id}")
     public String eliminarEstadoCita(@PathVariable("id") Integer id, RedirectAttributes ra) {
         try {
