@@ -16,19 +16,22 @@
           <h3 th:text="${cita.nombreUsuario}">Nombre Usuario</h3>
         </div>
         <div class="card-body">
-          <p><strong>Teléfono:</strong> <span th:text="${cita.telefono}"></span></p>
           <p><strong>Servicio:</strong> <span th:text="${cita.servicioNombre}"></span></p>
+          <p><strong>Fecha de la cita:</strong> <span th:text="${cita.fechaCita}"></span></p>
           <p><strong>Turno:</strong> <span th:text="${cita.turno}"></span></p>
           <p>
             <strong>Hora:</strong>
             <span th:text="${cita.horaInicio}"></span> -
             <span th:text="${cita.horaFin}"></span>
           </p>
+          <p><strong>Teléfono:</strong> <span th:text="${cita.telefono}"></span></p>
+
           <p>
             <strong>Estado:</strong>
             <span class="estado"
                   th:text="${cita.estado}"></span>
           </p>
+          <p><strong>Agendada el:</strong> <span th:text="${cita.fechaReserva}"></span></p>
         </div>
       </div>
     </div>

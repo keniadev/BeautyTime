@@ -1,4 +1,4 @@
-/* Importar fuentes de Google Fonts para un diseño moderno */
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap');
 
 /* Paleta de Colores Femeninos y Variables */
@@ -26,7 +26,7 @@
     width: 100%;
     max-width: 550px;
     box-sizing: border-box;
-    margin: 40px auto; /* Centra el formulario en el espacio del main layout */
+    margin: 40px auto;
     animation: fadeIn 0.8s ease-in-out;
 }
 
@@ -61,7 +61,7 @@
 
 .user-info .user-name {
     font-weight: 600;
-    color: var(--primary-color); /* CAMBIO AQUÍ: Usando el color principal para mejor contraste */
+    color: var(--primary-color);
 }
 
 /* ------------------------------------- */

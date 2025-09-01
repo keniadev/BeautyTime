@@ -3,15 +3,14 @@ package org.esfe.BeautyTimeApp.controladores;
 import org.esfe.BeautyTimeApp.modelos.*;
 import org.esfe.BeautyTimeApp.servicios.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,9 +26,6 @@ public class CitaController {
     private ICupoService cupoService;
 
     @Autowired
-    private IEstadoCitaService estadoCitaService;
-
-    @Autowired
     private IServicioService servicioService;
 
     @Autowired
@@ -40,12 +36,10 @@ public class CitaController {
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new RuntimeException("No hay usuario logueado");
         }
-
         String correo = ((UserDetails) authentication.getPrincipal()).getUsername();
         return usuarioService.BuscarPorCorreo(correo)
                 .orElseThrow(() -> new RuntimeException("Usuario logueado no encontrado"));
     }
-
 
     @GetMapping("/form")
     public String mostrarFormularioCita(Model model) {
@@ -60,41 +54,25 @@ public class CitaController {
     }
 
     @PostMapping("/confirmar")
-    public String confirmarCita(
+    @ResponseBody
+    public ResponseEntity<String> confirmarCita(
             @RequestParam("telefono") String telefono,
-            @RequestParam("cupoId") Integer cupoId,
-            Model model
+            @RequestParam("cupoId") Integer cupoId
     ) {
         try {
             Usuario usuario = getUsuarioLogueado();
             Cupo cupo = cupoService.BuscarPorId(cupoId)
                     .orElseThrow(() -> new RuntimeException("Cupo no encontrado"));
+            citaService.crearCitaConCupo(usuario, telefono, cupo);
 
-
-            cupoService.ocuparCupo(cupo.getServicio(), cupo.getFecha(), cupo.getTurno());
-
-            EstadoCita estadoPendiente = estadoCitaService.buscarPorNombre("Pendiente")
-                    .orElseThrow(() -> new RuntimeException("Estado pendiente no encontrado"));
-
-
-            Cita cita = new Cita();
-            cita.setUsuario(usuario);
-            cita.setTelefono(telefono);
-            cita.setCupo(cupo);
-            cita.setEstadoCita(estadoPendiente);
-            cita.setFechaReserva(LocalDateTime.now());
-
-            citaService.crearOEditar(cita);
-
-            return "redirect:/citas/mis-citas";
+            return ResponseEntity.ok("Cita agendada correctamente");
 
         } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("servicios", servicioService.ObtenerTodos());
-            return "cita/form-cita";
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al agendar cita: " + e.getMessage());
         }
     }
-
 
     @GetMapping("/mis-citas")
     public String misCitas(Model model) {

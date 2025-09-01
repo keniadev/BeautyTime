@@ -17,7 +17,6 @@ public class CategoriaController {
     @Autowired
     private ICategoriaService categoriaService;
 
-    // Muestra todas las categorías
     @GetMapping
     public String listarCategorias(Model model) {
         List<Categoria> categorias = categoriaService.ObtenerTodos();
@@ -26,14 +25,12 @@ public class CategoriaController {
         return "categorias/index";
     }
 
-    // Formulario de creación de una categoría
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("categoria", new Categoria());
         return "categorias/crearOeditar";
     }
 
-    // Guardar una nueva o editar una categoría existente
     @PostMapping("/guardar")
     public String guardarCategoria(@ModelAttribute Categoria categoria, RedirectAttributes ra) {
         try {
@@ -45,14 +42,12 @@ public class CategoriaController {
         return "redirect:/categorias";
     }
 
-    // Formulario para editar una categoría
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable("id") Integer id, Model model) {
         categoriaService.BuscarPorId(id).ifPresent(categoria -> model.addAttribute("categoria", categoria));
         return "categorias/crearOeditar";
     }
 
-    // Elimina una categoría por id
     @GetMapping("/eliminar/{id}")
     public String eliminarCategoria(@PathVariable("id") Integer id, RedirectAttributes ra) {
         try {
