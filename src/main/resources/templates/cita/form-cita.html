@@ -5,6 +5,8 @@
 <head>
 
     <link rel="stylesheet" href="/css/form-cita.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -16,7 +18,7 @@
             Nombre: <span class="user-name" th:text="${usuario.nombre}"></span> <span class="user-name" th:text="${usuario.apellido}"></span>
         </div>
         <form class="appointment-form" th:action="@{/citas/confirmar}" method="post" id="appointmentForm" novalidate>
-
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
             <div class="form-group">
                 <label for="telefono">Teléfono:</label>

@@ -1,0 +1,279 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Paleta de colores femeninos y elegantes */
+:root {
+    --primary-color: #6a0572;      /* Violeta profundo */
+    --secondary-color: #f7a399;    /* Rosa suave */
+    --accent-color: #e7b483;       /* Dorado claro para acentos */
+    --background-color: #fcf4f5;   /* Rosa muy claro */
+    --header-background: #fff;
+    --footer-background: #5b4a6b;  /* Ciruela oscuro */
+}
+
+/* Estilos de la fuente principal y cuerpo */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ----------------------------------- */
+/* Estilos del Header                  */
+/* ----------------------------------- */
+
+#header {
+    background-color: var(--header-background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.div-logo h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.nav {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease-out;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ----------------------------------- */
+/* Estilos de los Botones de Auth      */
+/* ----------------------------------- */
+
+.auth-buttons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.btn-auth {
+    padding: 0.7rem 1.8rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.btn-register {
+    background-image: linear-gradient(to right, var(--secondary-color), var(--accent-color));
+    color: #fff;
+    border: none;
+    background-size: 200% 100%;
+    transition: background-position 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-register:hover {
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ----------------------------------- */
+/* Estilos del Footer                  */
+/* ----------------------------------- */
+
+#footer {
+    background-color: var(--footer-background);
+    color: #fff;
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: auto;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+#footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-slogan {
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* ----------------------------------- */
+/* Estilos del Formulario de Login     */
+/* ----------------------------------- */
+
+.form-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.login-container {
+    background-color: #ffffff;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.login-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-input:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(247, 163, 153, 0.2);
+    outline: none;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    background-size: 200% 100%;
+    transition: background-position 0.5s ease;
+}
+
+.btn-submit:hover {
+    background-position: -100% 0;
+}
+
+.form-message {
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.message-error {
+    background-color: #fcebeb;
+    color: #e55a5a;
+    border: 1px solid #f9d9d9;
+}
+
+.message-success {
+    background-color: #e9f5e9;
+    color: #4a914a;
+    border: 1px solid #d4ecd4;
+}
+

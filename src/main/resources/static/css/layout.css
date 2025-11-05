@@ -32,7 +32,7 @@ body {
 
 .menu-logo {
     display: flex;
-    justify-content: space-between; /* Espacia el logo, nav y botones */
+    justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -47,7 +47,7 @@ body {
 
 .nav {
     display: flex;
-    flex-grow: 1; /* Permite que el nav ocupe el espacio restante */
+    flex-grow: 1;
     justify-content: center;
     list-style: none;
     margin: 0;
@@ -65,18 +65,29 @@ body {
     padding: 0 1rem;
 }
 
-.nav-link, a {
+
+.nav-link {
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--primary-color) !important;
     font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0;
 }
 
 .nav-link:hover {
-    color: var(--secondary-color);
+    color: var(--secondary-color) !important;
 }
 
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
 /* ----------------------------------- */
 /* Estilos de los Botones de Auth      */
 /* ----------------------------------- */
@@ -107,18 +118,31 @@ body {
     color: #fff;
 }
 
+/* ----------------------------------- */
+/* Botón de Registro Arreglado         */
+/* ----------------------------------- */
+
 .btn-register {
     background-image: linear-gradient(to right, var(--secondary-color), var(--accent-color));
     color: #fff;
     border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    text-decoration: none;
     background-size: 200% 100%;
-    transition: background-position 0.5s ease, box-shadow 0.3s ease;
+    transition: background-position 0.5s ease, box-shadow 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-register:hover {
     background-position: -100% 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transform: translateY(-2px);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
+
 
 /* ----------------------------------- */
 /* Estilos del Footer                  */
@@ -129,7 +153,7 @@ body {
     color: #fff;
     text-align: center;
     padding: 2rem 0;
-    margin-top: auto; /* Empuja el footer hacia abajo */
+    margin-top: auto;
     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -152,3 +176,17 @@ body {
     font-size: 1rem;
 }
 
+.sweet-alert-button {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 8px !important;
+    font-weight: bold !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.sweet-alert-button:hover {
+    background-color: var(--footer-background) !important;
+    transform: translateY(-2px);
+}

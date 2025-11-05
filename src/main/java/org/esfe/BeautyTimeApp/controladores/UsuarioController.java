@@ -1,5 +1,6 @@
 package org.esfe.BeautyTimeApp.controladores;
 
+import jakarta.validation.Valid;
 import org.esfe.BeautyTimeApp.modelos.Rol;
 import org.esfe.BeautyTimeApp.modelos.Usuario;
 import org.esfe.BeautyTimeApp.servicios.interfaces.IRolService;
@@ -60,16 +61,25 @@ public class UsuarioController {
 
 
     @PostMapping("/save")
-    public String save(Usuario usuario, BindingResult result, Model model, RedirectAttributes attributes){
+    public String save(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes attributes){
 
-        if(result.hasErrors()){
+        // Validación de campos
+        if (result.hasErrors()) {
             model.addAttribute("roles", rolService.ObtenerTodos());
+
+            // Crear un string con todos los mensajes de error para SweetAlert
+            String errores = result.getAllErrors()
+                    .stream()
+                    .map(error -> error.getDefaultMessage())
+                    .collect(Collectors.joining(", "));
+
+            model.addAttribute("errorMensaje", errores); // Se mostrará en tu SweetAlert
             return "usuario/create";
         }
 
-
+        // Validar que el rol exista
         Optional<Rol> rolOptional = rolService.BuscarPorId(usuario.getRol().getId());
-        if(rolOptional.isPresent()){
+        if (rolOptional.isPresent()) {
             usuario.setRol(rolOptional.get());
         } else {
             result.rejectValue("rol", "error.usuario", "Rol no válido");
@@ -77,8 +87,10 @@ public class UsuarioController {
             return "usuario/create";
         }
 
+        // Guardar usuario
         usuarioService.crearOEditar(usuario);
         attributes.addFlashAttribute("msg", "Usuario creado correctamente");
         return "redirect:/usuarios";
     }
+
 }
