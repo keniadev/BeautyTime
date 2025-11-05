@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.RequestMapping;
-=======
->>>>>>> main
+
 
 import java.util.List;
 
@@ -30,10 +27,7 @@ public class HomeController {
         List<Servicio> servicios = servicioService.ObtenerTodos();
 
         model.addAttribute("categorias", categorias);
-<<<<<<< HEAD
-=======
-        model.addAttribute("servicios", servicios);
->>>>>>> main
+
         return "home/index";
     }
 }
