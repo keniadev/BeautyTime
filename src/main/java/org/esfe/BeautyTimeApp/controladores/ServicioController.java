@@ -55,29 +55,23 @@ public class ServicioController {
         List<Servicio> servicios;
 
         if (categoriaId != null) {
-            servicios = servicioService.ObtenerTodos().stream()
-                    .filter(servicio -> servicio.getCategoria().getId().equals(categoriaId))
-                    .toList();
-            if (categoriaService != null) {
-                Optional<Categoria> categoria = categoriaService.BuscarPorId(categoriaId);
-                categoria.ifPresent(cat -> model.addAttribute("categoriaActual", cat));
-            }
+            servicios = servicioService.obtenerServiciosPorCategoria(categoriaId); // ✅ ahora filtra desde la BD
+
+            // Para mostrar el nombre de la categoría actual en la vista (opcional)
+            categoriaService.BuscarPorId(categoriaId)
+                    .ifPresent(cat -> model.addAttribute("categoriaActual", cat));
         } else {
-            servicios = servicioService.ObtenerTodos();
+            servicios = servicioService.ObtenerTodos(); // muestra todos si no hay categoría seleccionada
         }
 
         model.addAttribute("servicios", servicios);
         model.addAttribute("servicio", new Servicio());
+        model.addAttribute("categorias", categoriaService.ObtenerTodos());
 
-        if (categoriaService != null) {
-            List<Categoria> categorias = categoriaService.ObtenerTodos();
-            model.addAttribute("categorias", categorias);
-        } else {
-            model.addAttribute("categorias", List.of());
-        }
-
+        System.out.println("📦 Servicios mostrados: " + servicios.size());
         return "servicio/gestion-servicios";
     }
+
 
     @PostMapping("/guardar")
     public String guardarServicio(@ModelAttribute Servicio servicio) {
