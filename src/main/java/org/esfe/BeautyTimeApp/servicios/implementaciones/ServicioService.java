@@ -24,8 +24,12 @@ public class ServicioService implements IServicioService{
 
     @Override
     public List<Servicio> ObtenerTodos() {
-        return ServicioRepository.findAll();
+
+        List<Servicio> servicios = ServicioRepository.findAll();
+        System.out.println("📦 Servicios encontrados: " + servicios.size());
+        return servicios;
     }
+
 
     @Override
     public Optional<Servicio> BuscarPorId(Integer id) {
