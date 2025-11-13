@@ -9,7 +9,10 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "citas")
+@Table(name = "citas", uniqueConstraints = {
+        // AÑADIMOS ESTA RESTRICCIÓN: (Usuario, Cupo) debe ser único
+        @UniqueConstraint(columnNames = {"usuario_id", "cupo_id"})
+})
 public class Cita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

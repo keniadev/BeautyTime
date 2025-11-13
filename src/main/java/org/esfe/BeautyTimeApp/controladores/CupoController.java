@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalTime;
 
 @Controller
 public class CupoController {
@@ -81,7 +82,19 @@ public class CupoController {
 
         return cupoService.obtenerCuposPorServicioYFecha(servicio, fecha)
                 .stream()
+                // 1. FILTRO DE CANTIDAD: Solo cupos con cantidad > 0
                 .filter(c -> c.getCantidad() > 0)
+
+                // 2. FILTRO DE TIEMPO: Oculta turnos que ya pasaron
+                .filter(c -> {
+                    // Si la fecha seleccionada es HOY
+                    if (c.getFecha().isEqual(LocalDate.now())) {
+                        // Solo muestra el cupo si la hora de inicio es DESPUÉS de la hora actual
+                        return c.getTurno().getHoraInicio().isAfter(LocalTime.now());
+                    }
+                    // Si la fecha es FUTURA, siempre se muestra (siempre que c.getCantidad() > 0)
+                    return true;
+                })
                 .map(c -> new CupoDTO(
                         c.getId(),
                         c.getTurno().getNombreTurno(),

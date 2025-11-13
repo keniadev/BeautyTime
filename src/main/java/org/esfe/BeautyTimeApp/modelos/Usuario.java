@@ -40,7 +40,7 @@ public class Usuario {
     @Column(name ="foto_perfil", length = 255)
     private String fotoPerfil;
 
-    @NotNull
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rol_id", nullable = false)
     private Rol rol;

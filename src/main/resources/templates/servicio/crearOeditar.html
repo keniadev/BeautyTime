@@ -35,7 +35,10 @@
             </div>
 
             <!-- Formulario -->
-            <form th:action="@{/servicios/guardar}" th:object="${servicio}" method="post">
+            <form  th:action="@{/servicios/guardar}" th:object="${servicio}" method="post" enctype="multipart/form-data">
+
+
+
               <input type="hidden" th:field="*{id}">
 
               <div class="row">
@@ -76,6 +79,18 @@
                            required>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="imagen" class="form-label required-field">Imagen</label>
+                    <div class="input-icon">
+                      <i class="fas fas-image"></i>
+                      <input type="file" class="form-control" id="imagen"
+                             name="imagenFile"
+                             accept="image/*"
+                             th:attr="required=${servicio.id == null}">
+
+                    </div>
+                  </div>
 
                 <div class="col-md-6 mb-3">
                   <label for="categoria" class="form-label required-field">Categoría</label>
@@ -118,10 +133,38 @@
       </div>
     </div>
   </div>
-</div>
+
 
 
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const inputImagen = document.getElementById("imagen");
 
+    // Creamos un contenedor para el mensaje de error
+    const errorMsg = document.createElement("small");
+    errorMsg.id = "errorImagen";
+    errorMsg.style.color = "red";
+    errorMsg.style.display = "block";
+    errorMsg.style.marginTop = "5px";
+
+    // Insertamos el mensaje justo debajo del input
+    inputImagen.parentNode.appendChild(errorMsg);
+
+    inputImagen.addEventListener("change", () => {
+      const archivo = inputImagen.files[0];
+      const maxSizeMB = 10; // límite de 10 MB
+      const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+      if (archivo && archivo.size > maxSizeBytes) {
+        errorMsg.textContent = `⚠️ La imagen supera el tamaño máximo permitido de ${maxSizeMB} MB.`;
+        inputImagen.value = ""; // limpiar input
+      } else {
+        errorMsg.textContent = ""; // limpiar mensaje
+      }
+    });
+  });
+</script>
+</div>
 </body>
 </html>

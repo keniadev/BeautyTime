@@ -80,16 +80,25 @@ public class CitaService implements ICitaService {
         )).toList();
     }
 
-
-
     @Transactional
     public Cita crearCitaConCupo(Usuario usuario, String telefono, Cupo cupo) {
 
+        // 1. VERIFICACIÓN DE DUPLICADOS (NUEVA LÓGICA)
+        boolean yaExisteCita = citaRepository.existsByUsuarioIdAndCupoId(usuario.getId(), cupo.getId());
+
+        if (yaExisteCita) {
+            // Si ya existe, lanzamos una excepción clara
+            throw new RuntimeException("Ya tienes una cita agendada para este mismo turno, fecha y servicio. No se permite la duplicación.");
+        }
+        // --------------------------------------------------
+
+        // 2. Si no es duplicado, ocupamos el cupo
         cupoService.ocuparCupo(cupo.getServicio(), cupo.getFecha(), cupo.getTurno());
 
         EstadoCita estadoPendiente = estadoCitaService.buscarPorNombre("Pendiente")
                 .orElseThrow(() -> new RuntimeException("Estado pendiente no encontrado"));
 
+        // 3. Creamos la nueva cita
         Cita cita = new Cita();
         cita.setUsuario(usuario);
         cita.setTelefono(telefono);
@@ -99,4 +108,23 @@ public class CitaService implements ICitaService {
 
         return citaRepository.save(cita);
     }
+
+
+//    @Transactional
+//    public Cita crearCitaConCupo(Usuario usuario, String telefono, Cupo cupo) {
+//
+//        cupoService.ocuparCupo(cupo.getServicio(), cupo.getFecha(), cupo.getTurno());
+//
+//        EstadoCita estadoPendiente = estadoCitaService.buscarPorNombre("Pendiente")
+//                .orElseThrow(() -> new RuntimeException("Estado pendiente no encontrado"));
+//
+//        Cita cita = new Cita();
+//        cita.setUsuario(usuario);
+//        cita.setTelefono(telefono);
+//        cita.setCupo(cupo);
+//        cita.setEstadoCita(estadoPendiente);
+//        cita.setFechaReserva(LocalDateTime.now());
+//
+//        return citaRepository.save(cita);
+//    }
 }

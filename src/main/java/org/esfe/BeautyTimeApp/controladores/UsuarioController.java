@@ -60,34 +60,41 @@ public class UsuarioController {
     }
 
 
+    // package org.esfe.BeautyTimeApp.controladores; (resto de imports)
+// ...
+
     @PostMapping("/save")
     public String save(@Valid Usuario usuario, BindingResult result, Model model, RedirectAttributes attributes){
 
-        // Validación de campos
-        if (result.hasErrors()) {
-            model.addAttribute("roles", rolService.ObtenerTodos());
+        // 1. Asignar el rol de "Cliente" (ID=2) automáticamente
+        final Integer ROL_CLIENTE_ID = 2;
+        Optional<Rol> rolClienteOptional = rolService.BuscarPorId(ROL_CLIENTE_ID);
 
-            // Crear un string con todos los mensajes de error para SweetAlert
+        if (rolClienteOptional.isEmpty()) {
+            // Esto es un error grave, el rol 'Cliente' no existe en la base de datos
+            attributes.addFlashAttribute("error", "Error: No se pudo encontrar el Rol de Cliente (ID: " + ROL_CLIENTE_ID + ").");
+            return "redirect:/usuarios/create";
+        }
+
+        // Establecer el rol de Cliente al usuario
+        usuario.setRol(rolClienteOptional.get());
+
+
+        // 2. Validación de campos (la validación de campos del modelo sigue siendo necesaria)
+        if (result.hasErrors()) {
+            // Ya no necesitamos agregar "roles" al modelo
+            // model.addAttribute("roles", rolService.ObtenerTodos());
+
             String errores = result.getAllErrors()
                     .stream()
                     .map(error -> error.getDefaultMessage())
                     .collect(Collectors.joining(", "));
 
-            model.addAttribute("errorMensaje", errores); // Se mostrará en tu SweetAlert
-            return "usuario/create";
+            model.addAttribute("errorMensaje", errores);
+            return "usuario/create"; // Vuelve al formulario
         }
 
-        // Validar que el rol exista
-        Optional<Rol> rolOptional = rolService.BuscarPorId(usuario.getRol().getId());
-        if (rolOptional.isPresent()) {
-            usuario.setRol(rolOptional.get());
-        } else {
-            result.rejectValue("rol", "error.usuario", "Rol no válido");
-            model.addAttribute("roles", rolService.ObtenerTodos());
-            return "usuario/create";
-        }
-
-        // Guardar usuario
+        // 3. Guardar usuario
         usuarioService.crearOEditar(usuario);
         attributes.addFlashAttribute("msg", "Usuario creado correctamente");
         return "redirect:/usuarios";

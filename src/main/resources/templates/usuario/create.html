@@ -45,17 +45,17 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="rol">Rol</label>
-                        <select class="form-control" th:field="*{rol.id}" id="rol">
-                            <option value="" disabled selected>Seleccione un rol</option>
-                            <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+<!--            <div class="row">-->
+<!--                <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="rol">Rol</label>-->
+<!--                        <select class="form-control" th:field="*{rol.id}" id="rol">-->
+<!--                            <option value="" disabled selected>Seleccione un rol</option>-->
+<!--                            <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <hr>
             <div class="button-group">

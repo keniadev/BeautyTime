@@ -63,6 +63,12 @@
                     </div>
 
                     <div class="card-body">
+
+                        <img th:src="${servicio.imagenUrl}" alt="Imagen del servicio"
+                             class="img-fluid rounded mb-2"
+                             style="height: 180px; object-fit: cover; width: 100%;">
+
+
                         <!-- Nombre del servicio -->
                         <h5 class="card-title" th:text="${servicio.nombreServicio}"></h5>
 

@@ -34,7 +34,6 @@ public class Servicio {
     @Column(nullable = false)
     private int duracion;
 
-    // 🔹 Nuevo campo
     @Column(name = "imagen_url", length = 255)
     private String imagenUrl;
 
@@ -45,12 +44,13 @@ public class Servicio {
 
     public Servicio() {}
 
-    public Servicio(String nombreServicio, String descripcion, BigDecimal precio, int duracion, Categoria categoria) {
+    public Servicio(String nombreServicio, String descripcion, BigDecimal precio, int duracion, Categoria categoria, String imagenUrl) {
         this.nombreServicio = nombreServicio;
         this.descripcion = descripcion;
         this.precio = precio;
         this.duracion = duracion;
         this.categoria = categoria;
+        this.imagenUrl = imagenUrl;
     }
 
 
