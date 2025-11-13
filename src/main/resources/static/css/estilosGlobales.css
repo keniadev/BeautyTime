@@ -1,0 +1,23 @@
+
+
+:root {
+  /* 🎨 Paleta (ya la tienes, la dejamos) */
+  --moradoPrincipal: #FD6889;
+
+  /* 🖋️ Fuentes globales */
+  --fuente-titulos: 'Montserrat', sans-serif;
+  --fuente-parrafos: 'NATS', sans-serif;
+}
+
+/* ====== FUENTES GLOBALES ====== */
+body {
+  font-family: var(--fuente-parrafos);
+  margin: 0;
+  padding: 0;
+}
+
+/* Títulos y subtítulos */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--fuente-titulos);
+  font-weight: 600;
+}

@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "cupos")
+@Table(name = "cupos", uniqueConstraints = {
+        // ESTA RESTRICCIÓN ES CLAVE para evitar filas duplicadas.
+        @UniqueConstraint(columnNames = {"servicio_id", "fecha", "turno_id"})
+})
 public class Cupo {
     @Id
 
