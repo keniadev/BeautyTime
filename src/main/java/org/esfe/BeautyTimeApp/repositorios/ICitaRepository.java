@@ -21,4 +21,7 @@ public interface ICitaRepository extends JpaRepository<Cita, Integer> {
     """)
     List<Cita> findAllWithDetailsByUsuarioId(@Param("usuarioId") Integer usuarioId);
 
+    // AÑADIDO: Este método verifica si ya existe una cita para la combinación
+    boolean existsByUsuarioIdAndCupoId(Integer usuarioId, Integer cupoId);
+
 }

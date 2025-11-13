@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.esfe.BeautyTimeApp.servicios.interfaces.IServicioService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +43,15 @@ public class CitaController {
     }
 
     @GetMapping("/form")
-    public String mostrarFormularioCita(Model model) {
+    public String mostrarFormularioCita(
+        @RequestParam(value = "servicioId", required = false) Integer servicioId,
+        Model model) {
+
+            if (servicioId != null) {
+                // Modo INDIVIDUAL: Si se pasó un ID, buscamos el servicio y lo pasamos.
+                servicioService.BuscarPorId(servicioId)
+                        .ifPresent(servicio -> model.addAttribute("servicioSeleccionado", servicio));
+            }
         Usuario usuario = getUsuarioLogueado();
         List<Servicio> servicios = servicioService.ObtenerTodos();
 
