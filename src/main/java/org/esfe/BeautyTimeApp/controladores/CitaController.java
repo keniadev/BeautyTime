@@ -15,6 +15,7 @@ import org.esfe.BeautyTimeApp.servicios.interfaces.IServicioService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/citas")
@@ -42,23 +43,34 @@ public class CitaController {
                 .orElseThrow(() -> new RuntimeException("Usuario logueado no encontrado"));
     }
 
+    // CitaController.java
+
     @GetMapping("/form")
     public String mostrarFormularioCita(
-        @RequestParam(value = "servicioId", required = false) Integer servicioId,
-        Model model) {
+            @RequestParam(value = "servicioId", required = false) Integer servicioId,
+            Model model) {
 
-            if (servicioId != null) {
-                // Modo INDIVIDUAL: Si se pasó un ID, buscamos el servicio y lo pasamos.
-                servicioService.BuscarPorId(servicioId)
-                        .ifPresent(servicio -> model.addAttribute("servicioSeleccionado", servicio));
-            }
         Usuario usuario = getUsuarioLogueado();
-        List<Servicio> servicios = servicioService.ObtenerTodos();
-
         model.addAttribute("usuario", usuario);
         model.addAttribute("cita", new Cita());
+
+        if (servicioId != null) {
+            // MODO INDIVIDUAL: Se accede desde el catálogo.
+            Optional<Servicio> servicioOpt = servicioService.BuscarPorId(servicioId);
+
+            if (servicioOpt.isPresent()) {
+                model.addAttribute("servicioSeleccionado", servicioOpt.get());
+                // 💡 Redirigir a la NUEVA vista (sin el select de servicio)
+                return "cita/form-cita-servicio";
+            }
+            // Si el servicioId no existe, seguimos al modo global.
+        }
+
+        // MODO GLOBAL: Se accede directamente a /citas/form.
+        List<Servicio> servicios = servicioService.ObtenerTodos();
         model.addAttribute("servicios", servicios);
 
+        // 💡 Redirigir a la vista ORIGINAL (con el select de servicio)
         return "cita/form-cita";
     }
 
