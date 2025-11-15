@@ -1,10 +1,17 @@
-
-
 :root {
-  /* 🎨 Paleta (ya la tienes, la dejamos) */
-  --moradoPrincipal: #FD6889;
+  /* 🎨 Paleta de Colores */
+  --moradoPrincipal: #A516E6 ;
+  --rosadoMedio: #FD6889;
+  --moradoOscuro: #AE2495;
+  --grisMedio: #838383;
+  --rosadoClaro: #FF7E80;
+  --moradoSecundario: #C355A8;
+  --blanco: #FFFFFF;
+  --rosadoMuyClaro: #FECDF7;
+  --grisOscuro: #3D3D3D;
+  --fucsia: #F80B8D;
 
-  /* 🖋️ Fuentes globales */
+  /* 🖋️ Fuentes globales (ya estaban) */
   --fuente-titulos: 'Montserrat', sans-serif;
   --fuente-parrafos: 'NATS', sans-serif;
 }
