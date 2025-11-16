@@ -42,8 +42,9 @@ public class SecurityConfig {
                                 "/usuarios/create",
                                 "/usuarios/save"
                         ).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMINISTRADOR")
-                        .requestMatchers("/cliente/**").hasRole("CLIENTE")
+                        // USAR hasAuthority con el nombre exacto de la BD (minúsculas)
+                        .requestMatchers("/admin/**").hasAuthority("administrador")
+                        .requestMatchers("/cliente/**").hasAuthority("cliente")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

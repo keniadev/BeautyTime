@@ -27,8 +27,18 @@
         <nav class="nav">
             <ul>
                 <li><a class="nav-link" th:href="@{/}">Inicio</a></li>
-                <li><a class="nav-link" th:href="@{/citas/mis-citas}">Mis Citas</a></li>
-                <li><a class="nav-link" th:href="@{/categorias}">Panel Administrativo</a></li>
+
+                <li ><a class="nav-link" th:href="@{/citas/mis-citas}">Mis Citas</a></li>
+
+                <li sec:authorize="hasAuthority('administrador')">
+                    <a class="nav-link" th:href="@{/categorias}">Panel Administrativo</a>
+                </li>
+
+                <li sec:authorize="hasAuthority('cliente')">
+                    <a class="nav-link btn-agendar" th:href="@{/citas/form}">
+                        <i class="fas fa-calendar-check me-2"></i> Agendar cita
+                    </a>
+                </li>
             </ul>
         </nav>
 
