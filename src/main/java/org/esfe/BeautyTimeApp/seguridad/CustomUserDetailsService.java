@@ -26,7 +26,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("El usuario no tiene un rol asignado");
         }
 
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre().toUpperCase());
+       // SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + usuario.getRol().getNombre().toUpperCase());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getRol().getNombre().toLowerCase());
         return new org.springframework.security.core.userdetails.User(
                 usuario.getCorreo(),
                 usuario.getContrasena(),

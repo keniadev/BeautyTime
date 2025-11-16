@@ -41,21 +41,24 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public Usuario crearOEditar(Usuario usuario) {
-        logger.info("Guardando usuario con correo: {}", usuario.getCorreo());
-        logger.info("Contraseña antes de encriptar: {}", usuario.getContrasena());
         if (usuario.getId() == null) {
+            // 1. CREACIÓN: Encriptar siempre la nueva contraseña
             usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
-            logger.info("Contraseña encriptada: {}", usuario.getContrasena());
         } else {
-            Usuario existente = iUsuarioRepository.findById(usuario.getId()).orElse(null);
-            if (existente != null && !usuario.getContrasena().equals(existente.getContrasena())) {
+            // 2. EDICIÓN
+            Usuario existente = iUsuarioRepository.findById(usuario.getId()).orElseThrow(
+                    () -> new RuntimeException("Usuario no encontrado para edición.")
+            );
+
+            // Solo encriptar si la nueva contraseña no es nula/vacía
+            if (usuario.getContrasena() != null && !usuario.getContrasena().isEmpty()) {
                 usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
-                logger.info("Contraseña actualizada y encriptada: {}", usuario.getContrasena());
+            } else {
+                // Si la nueva contraseña está vacía, mantener la existente hasheada
+                usuario.setContrasena(existente.getContrasena());
             }
         }
-        Usuario savedUsuario = iUsuarioRepository.save(usuario);
-        logger.info("Usuario guardado: correo={}, rol_id={}", savedUsuario.getCorreo(), savedUsuario.getRol().getId());
-        return savedUsuario;
+        return iUsuarioRepository.save(usuario);
     }
 
     @Override

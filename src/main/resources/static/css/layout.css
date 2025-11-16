@@ -7,6 +7,39 @@
     --header-background: #fff;
     --footer-background: #5b4a6b;  /* Ciruela oscuro */
 }
+/* Estilo específico para el botón Agendar Cita en el menú de navegación */
+.nav ul li .btn-agendar {
+    /* Resetea la posición fixed si ya la tiene */
+    position: static;
+
+    /* Degradado y color (Puedes mantener los que ya tienes, pero ajustamos el padding) */
+    background: linear-gradient(135deg, var(--rosadoMedio) 0%, var(--moradoSecundario) 100%);
+    color: var(--blanco) !important;
+
+    /* Reducimos el tamaño para que encaje en el menú */
+    font-size: 0.9em;
+    padding: 8px 15px; /* Menos padding que el botón flotante */
+    border-radius: 20px; /* Redondez más discreta */
+
+    /* Resetear las sombras del botón flotante si son demasiado agresivas */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    /* Asegura que el ícono y texto estén alineados */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajuste del ícono dentro del botón del menú */
+.nav ul li .btn-agendar i {
+    font-size: 1em; /* El ícono tendrá el mismo tamaño que el texto */
+}
+
+/* Evitar que el color de hover de .nav-link afecte al botón */
+.nav ul li .btn-agendar:hover {
+    color: var(--blanco) !important;
+    transform: none; /* Evita la animación de scale o translate si no la quieres en el menú */
+}bbbbbbb
 
 /* Estilos de la fuente principal */
 body {

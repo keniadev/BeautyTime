@@ -1,218 +1,290 @@
-/* ===== ESTILOS PARA VISTA DE CATEGORÍAS CON CARDS ===== */
-.categorias-cards-container {
-    padding: 2rem 0;
-}
+//* ===== ESTILOS PARA VISTA DE CATEGORÍAS CON CARDS (USANDO VARIABLES GLOBALES) ===== */
+ .categorias-cards-container {
+     padding: 10rem 0 !important;
+ }
 
-.categorias-header {
-    text-align: center;
-    margin-bottom: 2.5rem;
-}
 
-.categorias-header h1 {
-    color: #2d3748;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
 
-/* ===== GRID DE CARDS ===== */
-.categorias-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
+ .categorias-header {
+     text-align: center;
+     margin-bottom: 2.5rem;
+ }
 
-.categoria-card {
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    position: relative;
-    overflow: hidden;
-}
+ /* Color del título en el encabezado (Usando variable) */
+ .categorias-header h1 {
+     color: var(--grisOscuro);
+     font-weight: 700;
+     margin-bottom: 0.5rem;
+ }
 
-.categoria-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
+ /* ===== GRID DE CARDS (Sin cambios) ===== */
+ .categorias-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+     gap: 1.5rem;
+     margin-top: 2rem;
+ }
 
-.categoria-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    border-color: #667eea;
-}
+ /* Estilo de la Card */
+ .categoria-card {
+     /* Degradado de fondo de la card: Blanco a Rosado Muy Claro */
+     background: linear-gradient(135deg, var(--blanco) 0%, var(--rosadoMuyClaro) 100%);
+     border: 1px solid var(--moradoSecundario); /* Borde usando variable */
+     border-radius: 16px;
+     padding: 1.5rem;
+     transition: all 0.3s ease;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+     position: relative;
+     overflow: hidden;
+ }
 
-/* ===== CONTENIDO DE LA CARD (SIN ICONO) ===== */
-.categoria-card-header {
-    margin-bottom: 1rem;
-}
+ /* REMOVIDO: La banda superior de la tarjeta (DEGRADADO ROSA/MORADO) */
+ /* .categoria-card::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     height: 4px;
+     background: linear-gradient(135deg, var(--fucsia) 0%, var(--moradoPrincipal) 100%);
+ } */
 
-.categoria-id {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 0.5rem;
-}
+ /* Estado hover de la tarjeta */
+ .categoria-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+     border-color: var(--fucsia); /* Borde color Fucsia al hacer hover */
+ }
 
-.categoria-nombre {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #2d3748;
-    margin-bottom: 1.5rem;
-    line-height: 1.4;
-}
+ /* ===== CONTENIDO DE LA CARD (SIN ICONO) ===== */
+ .categoria-card-header {
+     margin-bottom: 1rem;
+ }
 
-/* ===== BOTONES DE ACCIÓN ===== */
-.categoria-actions {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: center;
-}
+ /* ID de la Categoría (DEGRADADO ROSA/MORADO) */
+ .categoria-id {
+     /* Degradado Rosado Medio a Morado Principal */
+     background: linear-gradient(135deg, var(--rosadoMedio) 0%, var(--moradoPrincipal) 100%);
+     color: var(--blanco);
+     padding: 0.25rem 0.75rem;
+     border-radius: 20px;
+     font-size: 0.8rem;
+     font-weight: 600;
+     display: inline-block;
+     margin-bottom: 0.5rem;
+ }
 
-.btn-categoria-action {
-    flex: 1;
-    border: none;
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    text-align: center;
-}
+ /* Nombre de la Categoría (Usando variable) */
+ .categoria-nombre {
+     font-size: 1.25rem;
+     font-weight: 600;
+     color: var(--grisOscuro);
+     margin-bottom: 1.5rem;
+     line-height: 1.4;
+ }
 
-.btn-editar {
-    background: linear-gradient(135deg, #f6e05e 0%, #ecc94b 100%);
-    color: #744210;
-}
+ /* ===== BOTONES DE ACCIÓN (Sin cambios de estructura) ===== */
+ .categoria-actions {
+     display: flex;
+     gap: 0.75rem;
+     justify-content: center;
+ }
 
-.btn-editar:hover {
-    background: linear-gradient(135deg, #ecc94b 0%, #d69e2e 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-}
+ .btn-categoria-action {
+     flex: 1;
+     border: none;
+     border-radius: 10px;
+     padding: 0.75rem 1rem;
+     font-weight: 600;
+     font-size: 0.9rem;
+     transition: all 0.3s ease;
+     text-align: center;
+ }
 
-.btn-eliminar {
-    background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
-    color: white;
-}
+ /* Botón Editar (DEGRADADO ROSA/MORADO) */
+ .btn-editar {
+     /* Degradado Rosado Claro a Morado Secundario */
+     background: linear-gradient(135deg, var(--rosadoClaro) 0%, var(--moradoSecundario) 100%);
+     color: var(--blanco);
+ }
 
-.btn-eliminar:hover {
-    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
-}
+ .btn-editar:hover {
+     /* Degradado más oscuro */
+     background: linear-gradient(135deg, var(--moradoSecundario) 0%, var(--moradoOscuro) 100%);
+     transform: translateY(-2px);
+     box-shadow: 0 4px 12px rgba(195, 85, 168, 0.4);
+ }
 
-/* ===== BOTÓN NUEVA CATEGORÍA ===== */
-.btn-nueva-categoria {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    border-radius: 12px;
-    padding: 1rem 2rem;
-    font-weight: 600;
-    color: white;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
+ /* Botón Eliminar (DEGRADADO FUCSIA/ROSADO) */
+ .btn-eliminar {
+     /* Degradado Fucsia a Rosado Medio */
+     background: linear-gradient(135deg, var(--fucsia) 0%, var(--rosadoMedio) 100%);
+     color: var(--blanco);
+ }
 
-.btn-nueva-categoria:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-}
+ .btn-eliminar:hover {
+     /* Degradado más oscuro */
+     background: linear-gradient(135deg, var(--moradoOscuro) 0%, var(--rosadoClaro) 100%);
+     transform: translateY(-2px);
+     box-shadow: 0 4px 12px rgba(248, 11, 141, 0.3);
+ }
 
-/* ===== ESTADO VACÍO ===== */
-.categorias-empty {
-    text-align: center;
-    padding: 4rem 2rem;
-    color: #718096;
-}
+ /* ===== BOTÓN NUEVA CATEGORÍA (DEGRADADO ROSA/MORADO) ===== */
+ .btn-nueva-categoria {
+     /* Degradado Fucsia a Morado Principal */
+     background: linear-gradient(135deg, var(--fucsia) 0%, var(--moradoPrincipal) 100%);
+     border: none;
+     border-radius: 12px;
+     padding: 1rem 2rem;
+     font-weight: 600;
+     color: var(--blanco);
+     transition: all 0.3s ease;
+     box-shadow: 0 4px 12px rgba(248, 11, 141, 0.3);
+ }
 
-.categorias-empty-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-}
+ .btn-nueva-categoria:hover {
+     transform: translateY(-3px);
+     box-shadow: 0 8px 20px rgba(165, 22, 230, 0.4);
+ }
 
-.categorias-empty h3 {
-    color: #4a5568;
-    margin-bottom: 1rem;
-}
+ /* ===== ESTADO VACÍO (Usando variables) ===== */
+ .categorias-empty {
+     text-align: center;
+     padding: 4rem 2rem;
+     color: var(--grisMedio);
+ }
 
-/* ===== MENSAJES DE ALERTA ===== */
-.alert-categoria {
-    border-radius: 12px;
-    border: none;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-    color: white;
-    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
-}
+ .categorias-empty-icon {
+     font-size: 4rem;
+     margin-bottom: 1rem;
+     opacity: 0.5;
+ }
 
-.alert-danger-categoria {
-    background: linear-gradient(135deg, #f56565 0%, #e53e3e 100%);
-    box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
-}
+ .categorias-empty h3 {
+     color: var(--grisOscuro);
+     margin-bottom: 1rem;
+ }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .categorias-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
+ /* ===== MENSAJES DE ALERTA (Usando variables en los degradados) ===== */
+ .alert-categoria {
+     border-radius: 12px;
+     border: none;
+     padding: 1.25rem 1.5rem;
+     margin-bottom: 2rem;
+     /* Mantenido el verde para éxito */
+     background: linear-gradient(135deg, #68d391 0%, #48bb78 100%);
+     color: var(--blanco);
+     box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+ }
 
-    .categoria-card {
-        padding: 1.25rem;
-    }
+ .alert-danger-categoria {
+     /* Degradado Rosado Claro a Rosado Medio */
+     background: linear-gradient(135deg, var(--rosadoClaro) 0%, var(--rosadoMedio) 100%);
+     box-shadow: 0 4px 12px rgba(255, 126, 128, 0.3);
+ }
 
-    .categoria-actions {
-        flex-direction: column;
-    }
+ /* ===== RESPONSIVE y ANIMACIONES (Sin cambios necesarios) ===== */
+ @media (max-width: 768px) {
+     .categorias-grid {
+         grid-template-columns: 1fr;
+         gap: 1rem;
+     }
 
-    .btn-categoria-action {
-        width: 100%;
-    }
-}
+     .categoria-card {
+         padding: 1.25rem;
+     }
 
-@media (max-width: 576px) {
-    .categorias-header h1 {
-        font-size: 1.75rem;
-    }
+     .categoria-actions {
+         flex-direction: column;
+     }
 
-    .btn-nueva-categoria {
-        width: 100%;
-        padding: 0.875rem 1.5rem;
-    }
-}
+     .btn-categoria-action {
+         width: 100%;
+     }
+ }
 
-/* ===== ANIMACIONES ===== */
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+ @media (max-width: 576px) {
+     .categorias-header h1 {
+         font-size: 1.75rem;
+     }
 
-.categoria-card {
-    animation: slideInUp 0.6s ease forwards;
-}
+     .btn-nueva-categoria {
+         width: 100%;
+         padding: 0.875rem 1.5rem;
+     }
+ }
 
-.categoria-card:nth-child(1) { animation-delay: 0.1s; }
-.categoria-card:nth-child(2) { animation-delay: 0.2s; }
-.categoria-card:nth-child(3) { animation-delay: 0.3s; }
-.categoria-card:nth-child(4) { animation-delay: 0.4s; }
-.categoria-card:nth-child(5) { animation-delay: 0.5s; }
+ /* ===== ANIMACIONES (Sin cambios) ===== */
+ @keyframes slideInUp {
+     from {
+         opacity: 0;
+         transform: translateY(30px);
+     }
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .categoria-card {
+     animation: slideInUp 0.6s ease forwards;
+ }
+
+ .categoria-card:nth-child(1) { animation-delay: 0.1s; }
+ .categoria-card:nth-child(2) { animation-delay: 0.2s; }
+ .categoria-card:nth-child(3) { animation-delay: 0.3s; }
+ .categoria-card:nth-child(4) { animation-delay: 0.4s; }
+ .categoria-card:nth-child(5) { animation-delay: 0.5s; }
+
+ /*
+  * 1. Estilos para el contenedor Flex de Bootstrap (Sobrescribe en pantallas grandes)
+  * @media (min-width: 992px) corresponde a Bootstrap 'lg' (Large)
+  */
+ @media (min-width: 992px) {
+     /* * Hacemos que la fila NO se rompa y que maneje el espacio de los 5 elementos.
+      * La clase .row es display: flex por defecto, solo aseguramos que no haya salto de línea.
+      */
+     .row.g-3 {
+         flex-wrap: nowrap !important; /* Fuerza a que se mantengan en una sola línea */
+         overflow-x: auto; /* Agrega scroll horizontal si el contenedor es demasiado pequeño */
+         /* Eliminamos el margen lateral que a veces agrega Bootstrap */
+         margin-left: 0;
+         margin-right: 0;
+     }
+
+     /* * 2. Ajuste del ANCHO de cada columna (item) para que se repartan equitativamente
+      * y sean visualmente "proporcionadas".
+      */
+     .categoria-flex-item {
+         /* * Usamos flex-shrink: 0 para evitar que se encojan más allá de nuestro width.
+          * Forzamos un ancho para 5 elementos. (100% / 5 = 20%).
+          * Ajustamos el ancho para quitar el margen de g-3 (que es 1.5rem / 2 = 0.75rem en cada lado).
+          * Usamos la misma lógica que Bootstrap internamente:
+          */
+         flex-basis: calc(20% - var(--bs-gutter-x, 1.5rem)); /* 20% menos el padding/gap */
+         max-width: calc(20% - var(--bs-gutter-x, 1.5rem));
+         padding-left: calc(var(--bs-gutter-x, 1.5rem) * 0.5) !important;
+         padding-right: calc(var(--bs-gutter-x, 1.5rem) * 0.5) !important;
+
+         /* Asegura que no haya saltos de línea y que el ítem pueda alinearse */
+         display: flex;
+     }
+
+     /* * 3. Ajuste del CONTENIDO de la tarjeta para que todo esté centrado y ordenado.
+      * El .card-body es el que tiene d-flex, lo ajustamos para centrar el contenido y rellenar.
+      */
+     .card.categoria-card {
+         height: 100%; /* Asegura que todas las cards tengan la misma altura si la fila lo permite */
+     }
+
+     .card-body.d-flex {
+         flex-grow: 1; /* Permite que el card-body use todo el espacio vertical disponible */
+         justify-content: flex-start; /* Centra el contenido de arriba a abajo */
+         padding: 1.5rem; /* Asegura el padding de la tarjeta */
+     }
+
+     /* Para el ícono, si quieres que se vea bien centrado */
+     .icon-circle {
+         margin-bottom: 1rem !important; /* Asegura el espacio debajo del ícono */
+     }
+ }
