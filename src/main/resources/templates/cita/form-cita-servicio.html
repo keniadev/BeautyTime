@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/_mainLayout}">
+<head>
+  <link rel="stylesheet" href="/css/form-cita.css">
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="appointment-container">
+    <h2 class="appointment-title">Agendar Cita</h2>
+    <div class="user-info">
+      Nombre: <span class="user-name" th:text="${usuario.nombre}"></span> <span class="user-name" th:text="${usuario.apellido}"></span>
+    </div>
+    <form class="appointment-form" th:action="@{/citas/confirmar}" method="post" id="appointmentForm" novalidate>
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono"
+               placeholder="Tu teléfono"
+               pattern="[0-9]{8,15}"
+               title="El teléfono debe tener entre 8 y 15 dígitos y solo números"
+               required/>
+      </div>
+
+      <div class="form-group">
+        <label>Servicio:</label>
+        <p class="form-control-plaintext fw-bold" th:text="${servicioSeleccionado.nombreServicio}"></p>
+
+        <input type="hidden" id="servicio-individual" name="servicioId" th:value="${servicioSeleccionado.id}" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="fecha">Fecha de la cita:</label>
+        <input type="date" id="fecha" name="fecha" required/>
+      </div>
+
+      <div class="form-group">
+        <label for="cupos">Cupos disponibles:</label>
+        <select name="cupoId" id="cupos" required>
+          <option value="">Selecciona una fecha</option>
+        </select>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="appointment-button submit-button">Agendar Cita</button>
+        <button type="button" class="appointment-button cancel-button" onclick="window.history.back();">Cancelar</button>
+      </div>
+    </form>
+
+    <div th:if="${error}" id="errorMessageContainer" th:data-error-message="${error}" style="display: none;"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/js/form-cita.js" defer></script>
+</div>
+</body>
+</html>

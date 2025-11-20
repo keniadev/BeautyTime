@@ -12,10 +12,29 @@ $(document).ready(function() {
         }
     });
 
+    // 💡 PASO 1: DETERMINAR EL ELEMENTO DE SERVICIO ACTIVO (El ID que existe en la página)
+    let servicioInput = $('#servicio-global'); // Intenta obtener el ID del modo Global
+    if (servicioInput.length === 0) {
+        servicioInput = $('#servicio-individual'); // Si no existe, intenta obtener el ID del modo Individual
+    }
+
+    // Si no se encuentra ningún input de servicio esencial, detenemos la lógica de cupos.
+    if (servicioInput.length === 0) {
+        console.error("No se encontró el campo de Servicio (#servicio-global o #servicio-individual).");
+        // Asegúrate de que el mensaje de cupos refleje la falta de selección.
+        $('#cupos').html('<option value="">Error de configuración: falta campo Servicio</option>');
+        return;
+    }
+
+    // Ahora, la variable 'servicioInput' apunta al elemento correcto, sin importar su ID.
 
     function cargarCupos() {
         var fecha = $('#fecha').val();
-        var servicioId = $('#servicio').val();
+        // 🔥 PASO 2: USAMOS LA VARIABLE DETECTADA PARA OBTENER EL VALOR
+        var servicioId = servicioInput.val();
+
+        // El mensaje ahora debe ser general, ya que el servicio podría estar seleccionado
+        // o ser fijo. Si el servicioId no existe, significa que es el modo global y no ha seleccionado.
 
         if(fecha && servicioId) {
             $.ajax({
@@ -52,12 +71,26 @@ $(document).ready(function() {
                     $('#cupos').append('<option value="">Error al cargar cupos</option>');
                 }
             });
+        } else if (!fecha) {
+             $('#cupos').html('<option value="">Selecciona una fecha</option>');
         } else {
-            $('#cupos').html('<option value="">Selecciona un servicio y una fecha</option>');
+             $('#cupos').html('<option value="">Selecciona un servicio y una fecha</option>');
         }
     }
-    $('#fecha').change(cargarCupos);
-    $('#servicio').change(cargarCupos);
+
+    $('#fecha').change(cargarCupos); // Este evento aplica a ambos modos
+
+    // 💡 PASO 3: LÓGICA DE DISPARO DE EVENTOS Y CARGA INICIAL
+
+    // MODO GLOBAL: Si es un SELECT, agregamos el evento change para cuando el usuario lo cambie.
+    if (servicioInput.is('select')) {
+        servicioInput.change(cargarCupos);
+    }
+    // MODO INDIVIDUAL: Si es un INPUT HIDDEN, el servicio ya está fijo. Cargamos al iniciar
+    // si ya hay una fecha (o si el usuario la selecciona).
+    else if (servicioInput.is('input:hidden') && $('#fecha').val()) {
+        cargarCupos();
+    }
 
 
     setInterval(cargarCupos, 30000);
@@ -128,5 +161,16 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Lógica para mostrar errores de servidor (si vienen del POST)
+    const errorMessageElement = $('#errorMessageContainer');
+    if (errorMessageElement.length && errorMessageElement.data('error-message')) {
+        Swal.fire({
+            icon:'error',
+            title:'Error al Agendar Cita',
+            text: errorMessageElement.data('error-message'),
+            confirmButtonColor:'#6a0572'
+        });
+    }
 
 });

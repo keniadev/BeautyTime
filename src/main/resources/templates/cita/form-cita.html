@@ -31,8 +31,8 @@
 
 
             <div class="form-group">
-                <label for="servicio">Servicio:</label>
-                <select id="servicio" name="servicioId" required>
+                <label for="servicio-global">Servicio:</label>
+                <select id="servicio-global" name="servicioId" required>
                     <option value="">Selecciona un servicio</option>
                     <option th:each="serv : ${servicios}"
                             th:value="${serv.id}"
@@ -65,7 +65,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   <script src="/js/form-cita.js" defer></script>
+    <script src="/js/form-cita.js" defer></script>
 </div>
 </body>
 </html>
