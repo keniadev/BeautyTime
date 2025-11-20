@@ -1,219 +1,186 @@
-/* Estilos generales de la página */
-body {
-    background-color: #f7f7f7;
-    font-family: 'Poppins', sans-serif;
+/* ================================
+   🎨 PALETA Y TIPOGRAFÍAS
+================================ */
+:root {
+    --moradoPrincipal: #FD6889;
+
+    --g1: #AE2495;
+    --g2: #838383;
+
+    --rosa1: #FF7E80;
+    --rosa2: #EE5A73;
+    --rosa3: #F80B8D;
+
+    --morado1: #C355A8;
+    --morado2: #A516E6;
+
+    --oscuro: #3D3D3D;
+    --blanco: #FFFFFF;
+
+    --fuente-titulos: 'Montserrat', sans-serif;
+    --fuente-parrafos: 'NATS', sans-serif;
+
+    --gradiente-principal: linear-gradient(135deg, #FF7E80, #A516E6, #FD6889);
+    --gradiente-cards: linear-gradient(135deg, #ffe0f6, #e6d6ff);
 }
 
-.category-header h1 {
-    color: #e83e8c;
+/* ================================
+   🎨 BASE GENERAL
+================================ */
+body {
+    background: linear-gradient(180deg, #ffffff, #fff3fa 40%, #f8e9ff);
+    font-family: var(--fuente-parrafos);
+    margin: 0;
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+    font-family: var(--fuente-titulos);
     font-weight: 700;
+    color: var(--g1);
+}
+
+/* ================================
+   🎀 CABECERA DE CATEGORÍA
+================================ */
+.category-header h1 {
+    background: var(--gradiente-principal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
 }
 
 .category-header p {
-    color: #6c757d;
+    color: #7a7a7a;
 }
 
-/* Estilos para las tarjetas de servicio */
+/* ================================
+   🎁 TARJETAS DE SERVICIO
+================================ */
 .service-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    background: var(--gradiente-cards);
+    border-radius: 1.7rem;
+    transition: 0.35s ease;
+    border: none;
     cursor: pointer;
-    border: 1px solid #e9ecef;
     position: relative;
-    z-index: 1;
-    border-radius: 1.5rem;
     overflow: hidden;
-    background: linear-gradient(135deg, #ffe0f0, #e9e0ff); /* Degradado de fondo */
+    box-shadow: 0 15px 30px rgba(173, 20, 150, 0.15);
 }
 
 .service-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 1.5rem 3.5rem rgba(214, 51, 132, 0.25) !important;
-    border-color: #e83e8c;
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 45px rgba(173, 20, 150, 0.25);
 }
 
+/* Imagen */
 .service-gallery {
-    height: 200px;
+    height: 210px;
     overflow: hidden;
-    position: relative;
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
-}
-
-.thumbnail-container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.thumbnail-container.active-thumbnail {
-    opacity: 1;
+    border-radius: 1.7rem 1.7rem 0 0;
 }
 
 .service-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: .4s ease;
 }
 
+.service-card:hover .service-image {
+    transform: scale(1.07);
+}
+
+/* Placeholder */
 .image-placeholder {
-    width: 100%;
-    height: 100%;
-    background-color: #f8f9fa;
+    background: #fff;
     color: #bdbdbd;
-    font-size: 4rem;
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 3rem;
 }
 
+/* Contenido */
 .card-body {
     padding: 1.5rem;
-    position: relative;
-    z-index: 1;
 }
 
 .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: #495057;
-    font-weight: bold;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--oscuro);
+}
+
+.card-text.expandido {
+    -webkit-line-clamp: unset !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
 }
 
 .card-text {
-    font-size: 0.875rem;
-    line-height: 1.4;
-    height: 3em;
+    color: #6d6d6d;
+    font-size: 0.95rem;
+    line-height: 1.4em;    /* IMPORTANTE */
+    max-height: calc(1.4em * 3);
     overflow: hidden;
-    text-overflow: ellipsis;
-    color: #6c757d;
-}
-
-.service-details {
-    padding-top: 1rem;
-    border-top: 1px solid #e9ecef;
-}
-
-.price-tag {
-    font-size: 1.1rem;
-    background: linear-gradient(45deg, #ff69b4, #e83e8c); /* Degradado para el precio */
-    color: white;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.duration-tag {
-    font-size: 0.8rem;
-    color: #6c757d;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* OBLIGATORIO */
+    -webkit-box-orient: vertical;
+    transition: max-height 0.4s ease-in-out;
 }
 
 
-#imageModal .modal-content {
-    background: transparent;
-    border: none;
-    position: relative;
+
+.leer-mas {
+    color: var(--g1);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+    display: inline-block;
+    opacity: 0.7;
+    transition: 0.3s ease;
 }
 
-#imageModal .modal-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#imageModal .modal-image {
-    max-width: 100%;
-    max-height: 80vh;
-}
-
-#imageModal .btn-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    padding: 0.5rem;
+.leer-mas:hover {
     opacity: 1;
+    text-decoration: underline;
 }
 
-.btn-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+/* =================================================
+   FIN DE CAMBIOS PARA EL TRUNCAMIENTO DE TEXTO
+   =================================================
+*/
+
+
+/* Línea separadora */
+.service-details {
+    border-top: 2px dashed #dedede;
+    padding-top: 1rem;
+}
+
+/* Precio (ya no es botón) */
+.price-tag {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--g1);
+}
+
+/* Duración */
+.duration-tag {
+    color: #7c7c7c;
+    font-size: 0.85rem;
+}
+
+/* Botón Agendar */
+.card a.btn {
+    background: var(--gradiente-principal);
     border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-.btn-nav:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.btn-prev {
-    left: 1rem;
-}
-
-.btn-next {
-    right: 1rem;
-}
-
-
-.agendar-cita {
-    position: fixed;
-    top: 90px;
-    right: 20px;
-    z-index: 1050;
-}
-
-.btn-agendar {
-    background: linear-gradient(135deg, #FF69B4 0%, #BA55D3 100%);
-    color: #fff;
     font-weight: 600;
-    padding: 12px 20px;
-    border-radius: 50px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
+    padding: 10px;
+    border-radius: 1rem;
+    transition: 0.3s;
 }
 
-.btn-agendar:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    text-decoration: none;
-    color: #fff;
-}
-
-.btn-gradient {
-    background: linear-gradient(135deg, #FF69B4 0%, #BA55D3 100%);
-    color: #fff;
-    font-weight: 600;
-    padding: 12px 24px;
-    border-radius: 50px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-gradient:hover {
+.card a.btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    text-decoration: none;
-    color: #fff;
+    opacity: .9;
 }
