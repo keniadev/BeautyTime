@@ -20,18 +20,18 @@
 
 <header id="header">
     <div class="menu-logo">
-        <div class="div-logo">
-            <h2>BeautyTime</h2>
+        <div class="div-logo" th:href="@{/}">
+            <img th:src="@{/assets/img/logo3.png}" alt="Logo de BeautyTime" class="logo-img" />
         </div>
 
         <nav class="nav">
             <ul>
-                <li><a class="nav-link" th:href="@{/}">Inicio</a></li>
+                <li><a class="nav-link e" th:href="@{/}">Inicio</a></li>
 
-                <li ><a class="nav-link" th:href="@{/citas/mis-citas}">Mis Citas</a></li>
+                <li ><a class="nav-link e" th:href="@{/citas/mis-citas}">Mis Citas</a></li>
 
                 <li sec:authorize="hasAuthority('administrador')">
-                    <a class="nav-link" th:href="@{/categorias}">Panel Administrativo</a>
+                    <a class="nav-link e" th:href="@{/categorias}">Panel Administrativo</a>
                 </li>
 
                 <li sec:authorize="hasAuthority('cliente')">

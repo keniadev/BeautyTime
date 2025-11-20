@@ -7,7 +7,7 @@ public class HashGenerator {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         // 1. Defina la contraseña que desea para el administrador
-        String rawPassword = "kenia515"; // ¡Reemplace con su contraseña!
+        String rawPassword = "kenia515";
 
         // 2. Generar el hash
         String hashedPassword = encoder.encode(rawPassword);
