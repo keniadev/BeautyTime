@@ -18,7 +18,7 @@
 
     /* Reducimos el tamaño para que encaje en el menú */
     font-size: 0.9em;
-    padding: 8px 15px; /* Menos padding que el botón flotante */
+    padding: 10px 15px; /* Menos padding que el botón flotante */
     border-radius: 20px; /* Redondez más discreta */
 
     /* Resetear las sombras del botón flotante si son demasiado agresivas */
@@ -39,7 +39,7 @@
 .nav ul li .btn-agendar:hover {
     color: var(--blanco) !important;
     transform: none; /* Evita la animación de scale o translate si no la quieres en el menú */
-}bbbbbbb
+}
 
 /* Estilos de la fuente principal */
 body {
@@ -58,24 +58,53 @@ body {
 /* ----------------------------------- */
 
 #header {
-    background-color: var(--header-background);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 1rem 2rem;
+   /* 1. Reemplazamos el color sólido #fff por el gradiente */
+       background: linear-gradient(
+           to right,
+           rgba(255, 255, 255, 1) 0%, /* Blanco puro al inicio */
+           var(--rosadoMuyClaro) 60%, /* Rosa suave (f7a399) */
+           rgba(255, 255, 255, 1) 100% /* Blanco puro al final */
+       );
+
+       /* 2. Mantienes la sombra y el padding (ajusté el padding a 1.5rem para el logo) */
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra ligeramente más fuerte */
+       padding: 1.5rem 1rem; /* Ajuste recomendado */
+
+       /* Propiedad que debes añadir si quieres la sensación de "brillo" */
+       border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .menu-logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
-.div-logo h2 {
-    font-family: 'Playfair Display', serif;
-    color: var(--primary-color);
-    margin: 0;
-    font-size: 1.8rem;
+/* ----------------------------------- */
+/* Estilos Específicos del Logo (Nuevo)*/
+/* ----------------------------------- */
+
+/* ----------------------------------- */
+/* Estilos Específicos del Logo (Optimizado)*/
+/* ----------------------------------- */
+
+.div-logo {
+    /* Quitamos el height: 100% que puede interferir */
+    display: flex;
+    align-items: center;
+    /* Importante para que la imagen que se desborda no afecte el layout */
+    overflow: visible;
+    cursor:pointer;
+}
+
+.logo-img {
+    /* Hacemos la imagen mucho más grande para "llenar" el cuadrado */
+    height: 120px; /* Aumentamos la altura de 80px a 120px para que el diseño interno crezca */
+    width: auto;
+    /* Aseguramos que la posición sea relativa para que el margen negativo funcione */
+    position: relative;
 }
 
 .nav {
@@ -98,11 +127,36 @@ body {
     padding: 0 1rem;
 }
 
+/* ----------------------------------- */
+/* Estilos del Header... (Mantener el gradiente y padding) */
+/* ----------------------------------- */
 
+/* ... (El resto del CSS se mantiene igual) ... */
+
+/* ----------------------------------- */
+/* Estilos de Enlaces de Navegación */
+/* ----------------------------------- */
+
+/* 1. ESTILO ESPECÍFICO PARA LOS ENLACES DEL MENÚ (Inicio, Mis Citas, Panel) */
 .nav-link {
     text-decoration: none;
     color: var(--primary-color) !important;
-    font-weight: 500;
+
+    /* HACER GRANDE Y NEGRITA SOLO ESTOS ENLACES */
+    font-weight: 700   !important  ;  /* Negrita/Bold */
+    font-size: 1rem   !important ; /* Tamaño más grande */
+
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+.e {
+    text-decoration: none;
+    color: var(--primary-color) !important;
+
+    /* CORREGIDO: Sintaxis de !important */
+    font-weight: 600 !important;   /* Negrita/Bold garantizada */
+    font-size: 1.2rem !important;    /* Tamaño grande garantizado */
+
     transition: color 0.3s ease;
     padding: 0.5rem 0;
 }
@@ -111,11 +165,16 @@ body {
     color: var(--secondary-color) !important;
 }
 
-
+/* 2. ESTILO GENÉRICO 'A' (Solo para resetear lo que afecta a los botones) */
 a {
     text-decoration: none;
     color: var(--primary-color);
     transition: color 0.3s ease;
+
+    /* QUITAMOS LOS ESTILOS DE TAMAÑO Y PESO DE FUENTE DE AQUÍ */
+    /* Dejamos que los botones se rijan por sus propias clases (.btn-auth, etc.) */
+    font-weight: normal;
+    font-size: initial;
 }
 
 a:hover {
