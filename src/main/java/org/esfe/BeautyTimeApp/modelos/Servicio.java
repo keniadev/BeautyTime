@@ -22,8 +22,8 @@ public class Servicio {
     private String nombreServicio;
 
     @NotBlank
-    @Size(max = 255)
-    @Column(nullable = false, length = 255)
+    @Size(max =  5000)
+    @Column(nullable = false, length = 5000)
     private String descripcion;
 
     @NotNull
